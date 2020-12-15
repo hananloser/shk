@@ -7,7 +7,7 @@ export enum BtnType {
 }
 
 export enum Variant {
-    primary = 'border-2 border-transparent bg-primary-500 hover:bg-primary-400',
+    primary = 'border-2 border-transparent bg-primary hover:bg-primary-900 transform hover:scale-150 duration-200',
     secondary = 'border-2 border-transparent bg-white text-primary-500',
     silent = 'border-2 border-transparent bg-transparent text-primary-500',
     outline = 'border-2 border-gray-600 text-primary-500 transition duration-100 hover:bg-gray-600 hover:bg-opacity-10',
@@ -42,6 +42,7 @@ type Props = HtmlButtonProps & {
 
 
 export const Button: React.FC<Props> = function ({
+    type,
     btnType = 'normal',
     variant = 'primary',
     textVariant = 'normal',
@@ -51,7 +52,7 @@ export const Button: React.FC<Props> = function ({
     children,
     ...props
 }) {
-    if (typeof onClick !== 'function' && !href)
+    if (typeof onClick !== 'function' && type !== 'submit' && !href)
         return null;
 
     const className = clsx(
@@ -63,6 +64,6 @@ export const Button: React.FC<Props> = function ({
         props.className
     );
     return (
-        <button {...props} className={className} type={'button'} onClick={onClick} children={children} />
+        <button {...props} className={className} type={type || 'button'} onClick={onClick} children={children} />
     );
 }
