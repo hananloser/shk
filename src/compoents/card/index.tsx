@@ -23,7 +23,7 @@ export const Card: React.FC<Props> = ({
 }) => {
     
     const className = clsx(
-        'bg-primary shadow shadow-lg rounded-lg px-5 md:px-32',
+        'bg-primary shadow shadow-lg rounded-lg px-5 px-12',
         Size[size],
         Color[color]
     )

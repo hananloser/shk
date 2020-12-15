@@ -4,8 +4,8 @@ import MemoUserIcon from '../../assets/icons/UserIcon'
 import { Button } from '../../compoents/button'
 import { Card } from '../../compoents/card'
 import { Container } from '../../compoents/container'
-import { Input } from './component/Input/Input'
-import { InputGroup } from './component/Input/InputGroup'
+import Input from './component/Input/Input'
+import InputGroup from './component/Input/InputGroup'
 
 const Auth = () => {
    return (
@@ -13,7 +13,7 @@ const Auth = () => {
          <Card
             color='default'
             size='large'>
-               
+
             <div className="title text-center mt-7 font-bold text-2xl">
                Selamat Datang
 				</div>
@@ -21,11 +21,11 @@ const Auth = () => {
             <div className="title text-center mt-7 font-bold text-xl">
                Silakan Masukan Username Dan Password
 				</div>
-            
+
             <InputGroup icon={<MemoUserIcon />}>
                <Input type='text' name='username' placeholder="Username Or Email" autoComplete='off' />
             </InputGroup>
-            
+
             <InputGroup icon={<PasswordIcon />}>
                <Input type='password' name='password' placeholder="Password" />
             </InputGroup>
