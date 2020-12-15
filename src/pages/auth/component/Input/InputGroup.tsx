@@ -6,7 +6,7 @@ interface Props {
     icon : React.SVGProps<SVGSVGElement>
 }
 
-export const InputGroup = ({ children , icon } : Props ) => {
+const InputGroup = ({ children , icon } : Props ) => {
     return (
         <div className="flex flex-wrap w-full relative h-15 bg-gray-200 items-center rounded-xl mb-4 shadow-lg my-4">
             <div className="flex -mr-px justify-center w-15 p-4">
@@ -18,3 +18,4 @@ export const InputGroup = ({ children , icon } : Props ) => {
         </div>
     )
 }
+export default InputGroup

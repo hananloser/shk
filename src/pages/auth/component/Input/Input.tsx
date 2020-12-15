@@ -7,7 +7,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 
-export const Input = ({ name, type, ...rest }: Props) => {
+const Input = ({ name, type, ...rest }: Props) => {
     return (
         <input
             id={name}
@@ -17,3 +17,5 @@ export const Input = ({ name, type, ...rest }: Props) => {
         />
     )
 }
+
+export default Input
