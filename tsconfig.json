@@ -12,6 +12,7 @@
     "newLine": "lf",
     "removeComments": true,
     "sourceMap": true,
+    "skipLibCheck": true,
     // Log output
     "pretty": true,
     // Type checking
@@ -22,7 +23,6 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "skipLibCheck": true,
     "strict": false,
     "strictBindCallApply": true,
     "strictFunctionTypes": false,
@@ -34,7 +34,8 @@
     ],
     "allowJs": true,
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "typeRoots": ["src/@types", "node_modules/@types"]
   },
   "include": [
     "next-env.d.ts",
