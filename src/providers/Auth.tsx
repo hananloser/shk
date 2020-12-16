@@ -3,12 +3,12 @@ import React, { ReactNode, ReactElement } from 'react'
 
 type AuthContext = {
     isAuthenticated: boolean,
-    setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+    setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const AuthContext = React.createContext<AuthContext>({
     isAuthenticated: false,
-    setAuthenticated: () => { }
+    setAuthenticated: () => { },
 })
 
 export const AuthProvider = ({ children, authenticated }: { children: ReactNode, authenticated: boolean }): ReactElement => {
