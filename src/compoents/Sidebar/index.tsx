@@ -4,9 +4,9 @@ import React from 'react'
 const Sidebar = () => {
     const menu = [
         { name: "Profil SPBU" },
-        { name: "Produk"},
-        { name: "Laporan Harian"},
-        { name: "Stok Minyak"},
+        { name: "Produk" },
+        { name: "Laporan Harian" },
+        { name: "Stok Minyak" },
         { name: "Kas Besar" },
         { name: "Buku Bank" },
         { name: "Penjualan" },
@@ -22,8 +22,8 @@ const Sidebar = () => {
             </div>
             <div className="flex top-48 left-8 relative">
                 <ul className="text-white font-bold text-xl space-y-3">
-                    {menu.map(item => (
-                        <li className="hover:text-blue-300 cursor-pointer">{item.name}</li>
+                    {menu.map((item, index) => (
+                        <li key={index} className="hover:text-blue-300 cursor-pointer">{item.name}</li>
                     ))}
                 </ul>
             </div>
