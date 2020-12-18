@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PasswordIcon from '../../assets/icons/Password'
 import MemoUserIcon from '../../assets/icons/UserIcon'
 import Input from './component/Input/Input'
@@ -9,8 +9,7 @@ import { Container } from '../../compoents/container'
 import { Button } from '../../compoents/button'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-
-
+import { Cookies } from 'react-cookie';
 type Login = {
 	email?: string,
 	password?: string
@@ -19,12 +18,17 @@ type Login = {
 const Auth = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const { register, handleSubmit, errors } = useForm<Login>()
+	const [token, setToken] = useState<string | null>();
 	const router = useRouter()
-
+	const cookies = new Cookies()
 	const handleForm = ({ email, password }: Login) => {
 		console.log(errors);
 		login({ email, password });
 	}
+
+	useEffect(() => {
+		setToken(cookies.get('token'))
+	}, [token])
 
 	const login = async ({ email, password }: Login) => {
 		setLoading(true);
@@ -37,7 +41,7 @@ const Auth = () => {
 		})
 		const json = await response.json();
 		if (response.status == 200) {
-			localStorage.setItem('token', json['access_token'])
+			cookies.set('token', json['access_token'])
 			router.push('/dashboard')
 			setLoading(false);
 		} else if (response.status == 401) {

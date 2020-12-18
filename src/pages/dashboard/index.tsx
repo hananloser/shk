@@ -4,6 +4,7 @@ import MemoTrendingUp from '../../assets/icons/TrendingUp'
 import MemoWallet from '../../assets/icons/Wallet'
 import { Card } from '../../compoents/card'
 import Sidebar from '../../compoents/Sidebar'
+import { withAuth } from '../../hoc/withAuth'
 
 const Dashboard = () => {
     return (
@@ -27,7 +28,7 @@ const Dashboard = () => {
                     <div className="flex flex-col md:flex-row justify-between  items-center text-center">
                         <Card size='small' customClass={'mt-2 flex flex-col item-center justify-center'}>
                             <div className="icon text-center flex justify-center mb-2">
-                                <MemoTrendingUp className='text-9xl' />
+                                <MemoTrendingUp className='text-9xl'/>
                             </div>
                             <div className="flex flex-col justify-center">
                                 <span>400</span>
@@ -59,4 +60,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default withAuth(Dashboard)
