@@ -5,7 +5,7 @@ import redirect from '../lib/redirect';
 
 const cookie = new Cookies();
 
-export const withAuth = <T extends object>(Component: React.FC<T>) => {
+export const withoutAuth = <T extends object>(Component: React.FC<T>) => {
     const AuthComponent: React.FC<T> = (props) => {
         const me = async () => {
             const response = await fetch('https://shk-backend.test/api/v1/me', {
@@ -14,8 +14,8 @@ export const withAuth = <T extends object>(Component: React.FC<T>) => {
                     'Authorization': 'Bearer ' + cookie.get('token')
                 }
             });
-            if (response.status == 401 || cookie.get('token') == null) {
-                redirect('error', '/')
+            if (response.status == 200 || cookie.get('token') !== undefined) {
+                redirect('error', '/dashboard')
             }
         }
         useEffect(() => {

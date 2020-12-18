@@ -10,6 +10,8 @@ import { Button } from '../../compoents/button'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { Cookies } from 'react-cookie';
+import { withAuth } from '../../hoc/withAuth'
+import { withoutAuth } from '../../hoc/withoutAuth'
 type Login = {
 	email?: string,
 	password?: string
@@ -96,4 +98,4 @@ const Auth = () => {
 	)
 }
 
-export default Auth
+export default withoutAuth(Auth)
