@@ -8,7 +8,7 @@ import withConditionalRedirect from './withConditionRedirect';
  */
 export default function withoutAuth<P>(
   WrappedComponent: NextPage<P>,
-  location = '/profile'
+  location = '/login'
 ): NextPage<P> {
   return withConditionalRedirect({
     WrappedComponent,

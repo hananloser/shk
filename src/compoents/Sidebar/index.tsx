@@ -3,7 +3,7 @@ import React from 'react'
 
 const Sidebar = () => {
     const menu = [
-        { name: "Profil SPBU" },
+        { name: "Dashboard"},
         { name: "Produk" },
         { name: "Laporan Harian" },
         { name: "Stok Minyak" },
