@@ -22,6 +22,7 @@ const Auth = () => {
 	const [token, setToken] = useState<string | null>();
 	const router = useRouter()
 	const cookies = new Cookies()
+	const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/login`
 	const handleForm = ({ email, password }: Login) => {
 		console.log(errors);
 		login({ email, password });
@@ -33,7 +34,7 @@ const Auth = () => {
 
 	const login = async ({ email, password }: Login) => {
 		setLoading(true);
-		const response = await fetch('https://shk-backend.test/api/v1/login', {
+		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
