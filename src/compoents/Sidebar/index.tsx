@@ -16,7 +16,7 @@ const Sidebar = () => {
         { name: "Neraca", path: "/neraca" },
     ]
     return (
-        <div className="hidden md:flex flex-col bg-primary absolute h-screen  w-80">
+        <div className="hidden md:flex flex-col bg-primary fixed  h-screen  w-80">
             <div className="relative top-5 left-20  ">
                 <span className="font-bold text-5xl text-white">Logo</span>
             </div>
