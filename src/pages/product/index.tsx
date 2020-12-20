@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import React from 'react'
 import MainContent from '../../compoents/container/MainContent'
 import Sidebar from '../../compoents/Sidebar'
+import { withAuth } from '../../hoc/withAuth'
 import { Product as Iproduct } from '../../model/Product'
 
 interface Props {
@@ -52,7 +53,7 @@ const Product = ({ data }: Props) => {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const url = 'http://shk-backend.test/api/v1/product'
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/product`
     const response = await fetch(url)
     const { data } = await response.json()
     return {
@@ -62,4 +63,4 @@ export const getStaticProps: GetStaticProps = async () => {
         revalidate: 1
     }
 }
-export default Product
+export default withAuth(Product)
