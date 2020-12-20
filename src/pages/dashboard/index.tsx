@@ -2,8 +2,8 @@ import React from 'react'
 import MemoTrendingDown from '../../assets/icons/TrendingDown'
 import MemoTrendingUp from '../../assets/icons/TrendingUp'
 import MemoWallet from '../../assets/icons/Wallet'
-import { Card } from '../../compoents/card'
 import Sidebar from '../../compoents/Sidebar'
+import { Card } from '../../compoents/card'
 import { withAuth } from '../../hoc/withAuth'
 
 const Dashboard = () => {

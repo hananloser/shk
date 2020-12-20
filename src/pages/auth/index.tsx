@@ -7,10 +7,11 @@ import Skeleton from 'react-loading-skeleton'
 import { Card } from '../../compoents/card'
 import { Container } from '../../compoents/container'
 import { Button } from '../../compoents/button'
-import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { Cookies } from 'react-cookie';
 import { withoutAuth } from '../../hoc/withoutAuth'
+import { AuthToken } from '../../services/auth_token'
+
 type Login = {
 	email?: string,
 	password?: string
@@ -20,7 +21,6 @@ const Auth = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const { register, handleSubmit, errors } = useForm<Login>()
 	const [token, setToken] = useState<string | null>();
-	const router = useRouter()
 	const cookies = new Cookies()
 	const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/login`
 	const handleForm = ({ email, password }: Login) => {
@@ -43,8 +43,7 @@ const Auth = () => {
 		})
 		const json = await response.json();
 		if (response.status == 200) {
-			cookies.set('token', json['access_token'])
-			router.push('/dashboard')
+			await AuthToken.storeToken(json['access_token'])
 			setLoading(false);
 		} else if (response.status == 401) {
 			setLoading(false);
@@ -98,4 +97,4 @@ const Auth = () => {
 	)
 }
 
-export default withoutAuth(Auth)
+export default Auth
