@@ -10,6 +10,7 @@ import { Button } from '../../compoents/button'
 import { useForm } from 'react-hook-form'
 import { Cookies } from 'react-cookie';
 import { AuthToken } from '../../services/auth_token'
+import { API } from '../../services/api'
 
 type Login = {
 	email?: string,
@@ -18,10 +19,13 @@ type Login = {
 
 const Auth = () => {
 	const [loading, setLoading] = useState<boolean>(false);
+	
 	const { register, handleSubmit, errors } = useForm<Login>()
+	
 	const [token, setToken] = useState<string | null>();
+	
 	const cookies = new Cookies()
-	const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/login`
+
 	const handleForm = ({ email, password }: Login) => {
 		console.log(errors);
 		login({ email, password });
@@ -33,14 +37,8 @@ const Auth = () => {
 
 	const login = async ({ email, password }: Login) => {
 		setLoading(true);
-		const response = await fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ email: email, password: password })
-		})
-		const json = await response.json();
+		const response = await API.post('/api/v1/login', { email, password })
+		const json = await response.data;
 		if (response.status == 200) {
 			await AuthToken.storeToken(json['access_token'])
 			setLoading(false);

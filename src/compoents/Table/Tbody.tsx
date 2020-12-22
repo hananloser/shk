@@ -5,7 +5,7 @@ interface TbodyWrapperProps {
 }
 
 interface Tbody {
-    value: string | number
+    value: string | number | null
 }
 
 export const TbodyContentWrapper = ({ children }: TbodyWrapperProps) => {

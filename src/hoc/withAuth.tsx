@@ -34,7 +34,7 @@ export const withAuth = (WrappedComponent: any) => {
 
 
         render() {
-            return <WrappedComponent token={this.auth}  {...this.props}  />
+            return <WrappedComponent  {...this.props}  />
         }
     }
 }
