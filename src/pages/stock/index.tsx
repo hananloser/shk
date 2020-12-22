@@ -2,19 +2,18 @@ import React from 'react'
 import MainContent from '../../compoents/container/MainContent'
 import Header from '../../compoents/Header/Index'
 import Sidebar from '../../compoents/Sidebar'
-import Table from '../../compoents/Table'
 import { withAuth } from '../../hoc/withAuth'
 
-const Product = () => {
+const Stock = () => {
     return (
-        <>
+        <div>
             <Sidebar />
             <MainContent>
                 <Header />
-                <Table />
+                ini halaman stock
             </MainContent>
-        </>
+        </div>
     )
 }
 
-export default withAuth(Product)
+export default withAuth(Stock)

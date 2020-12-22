@@ -9,7 +9,6 @@ import { Container } from '../../compoents/container'
 import { Button } from '../../compoents/button'
 import { useForm } from 'react-hook-form'
 import { Cookies } from 'react-cookie';
-import { withoutAuth } from '../../hoc/withoutAuth'
 import { AuthToken } from '../../services/auth_token'
 
 type Login = {

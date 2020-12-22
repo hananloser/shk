@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "clsx": "^1.1.1",
+    "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "next": "10.0.3",
     "next-cookies": "^2.0.3",
@@ -19,9 +20,9 @@
     "react-loading-skeleton": "^2.1.1"
   },
   "devDependencies": {
-    "@types/react-cookies": "^0.1.0",
     "@types/node": "^14.14.13",
     "@types/react": "^17.0.0",
+    "@types/react-cookies": "^0.1.0",
     "autoprefixer": "^10.1.0",
     "postcss": "^8.2.1",
     "tailwindcss": "^2.0.2",

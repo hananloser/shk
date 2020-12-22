@@ -5,8 +5,8 @@ const Sidebar = () => {
     const menu = [
         { name: "Dashboard", path: '/dashboard' },
         { name: "Produk", path: '/product' },
-        { name: "Laporan Harian", path: '/laporan' },
-        { name: "Stok Minyak", path: '/stok-minyak' },
+        { name: "Laporan Harian", path: '/report' },
+        { name: "Stok Minyak", path: '/stock' },
         { name: "Kas Besar", path: "/kas" },
         { name: "Buku Bank", path: "/buku_bank" },
         { name: "Penjualan", path: "/selling" },
@@ -18,6 +18,7 @@ const Sidebar = () => {
     return (
         <div className="hidden md:flex flex-col bg-primary fixed  h-screen  w-80">
             <div className="relative top-5 left-20  ">
+
                 <span className="font-bold text-5xl text-white">Logo</span>
             </div>
             <div className="flex top-48 left-8 relative">

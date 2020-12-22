@@ -2,19 +2,17 @@ import React from 'react'
 import MainContent from '../../compoents/container/MainContent'
 import Header from '../../compoents/Header/Index'
 import Sidebar from '../../compoents/Sidebar'
-import Table from '../../compoents/Table'
-import { withAuth } from '../../hoc/withAuth'
 
-const Product = () => {
+const Report = () => {
     return (
-        <>
+        <div>
             <Sidebar />
             <MainContent>
                 <Header />
-                <Table />
+                <span>Halaman Report</span>
             </MainContent>
-        </>
+        </div>
     )
 }
 
-export default withAuth(Product)
+export default Report
