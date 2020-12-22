@@ -3,10 +3,16 @@ import { Button } from '../button'
 import { Thead, TheadWrapper } from './Thead'
 import { TbodyContentWrapper, Tbody } from './Tbody'
 
-const Table = ({ }) => {
+
+interface TableProps {
+    name : string,
+}
+
+const Table = ({ name  }: TableProps) => {
     return (
         <>
-            <div className="flex justify-end  px-24 py-2">
+           <div className="flex justify-between  px-24 py-2">
+                <header>{ name  }</header>
                 <Button variant='primary' textVariant='bold' size='xlarge' type='button' onClick={() => alert('test')}>
                     Tambah
                </Button>

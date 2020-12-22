@@ -11,7 +11,7 @@ const Product = () => {
             <Sidebar />
             <MainContent>
                 <Header />
-                <Table />
+                <Table name="Produk" />
             </MainContent>
         </>
     )

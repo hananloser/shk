@@ -21,7 +21,7 @@ export const withoutAuth = <T extends object>(Component: React.FC<T>) => {
         useEffect(() => {
             me();
         }, [])
-
+  
         return (
             <Component {...props} />
         )
