@@ -2,14 +2,12 @@ import React from 'react'
 import MemoTrendingDown from '../../assets/icons/TrendingDown'
 import MemoTrendingUp from '../../assets/icons/TrendingUp'
 import MemoWallet from '../../assets/icons/Wallet'
-import Sidebar from '../../compoents/Sidebar'
 import { Card } from '../../compoents/card'
 import { withAuth } from '../../hoc/withAuth'
 
 const Dashboard = () => {
     return (
         <div>
-            <Sidebar />
             <div className="flex flex-col md:ml-80">
                 <div className="header px-5 shadow-lg w-full h-24 mb-3 flex justify-between items-center md:px-20">
                     <span></span>
