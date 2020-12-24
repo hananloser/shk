@@ -12,7 +12,7 @@ const Modal = ({ children }: ModalProps) => {
         modal ? (
             <>
                 <div className="modal bg-gray-700 right-0 opacity-80 min-w-full h-screen fixed flex justify-center text-white items-center" onClick={() => setModal(!modal)}></div>
-                <div className="bg-white rounded-md w-1/2 h-28 fixed flex justify-center top-56 right-96">
+                <div className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 ">
                     {children}
                 </div>
             </>

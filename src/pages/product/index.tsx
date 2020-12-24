@@ -51,7 +51,21 @@ const Product = () => {
                     </table>
                 </div>
                 <Modal>
-                    <p>Saya Adalah Salman</p>
+                    <div className="p-2 l">
+                        <div className="overflow-auto h-44">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod commodi, veritatis dicta aut cupiditate, adipisci deserunt in, saepe quidem nulla
+                            tenetur sunt. Iste expedita eveniet rem quisquam eaque dolore! Similique in laborum nulla saepe commodi autem labore, perferendis et rerum repellat
+                            vero incidunt delectus alias ipsam voluptates quasi. Ipsa maxime officiis non expedita odio consequuntur. Totam, blanditiis! Voluptas necessitatibus
+                            voluptatibus unde expedita praesentium obcaecati dolor nesciunt magnam magni voluptatem, excepturi natus minima illo cum aliquid officia corrupti eveniet.
+                            Unde voluptate, facere repellat, iure sunt molestiae fuga deleniti corrupti eveniet maiores, eligendi dolorem aspernatur adipisci harum debitis. Ex cupiditate
+                            molestias modi. Aperiam sequi assumenda iure eveniet inventore ipsa voluptatibus dolor. Esse voluptatem tenetur quos voluptates temporibus minus distinctio
+                            dicta necessitatibus, nihil provident et vitae dolore quas quia praesentium fugiat a numquam! Possimus suscipit alias eligendi dignissimos consequatur quos
+                            id atque aliquam exercitationem culpa sed at distinctio cupiditate nemo corporis delectus, reiciendis commodi. Praesentium quia, similique vitae officia facere
+                            accusantium. Enim natus quibusdam aspernatur minima impedit quas commodi fugiat? Numquam non nobis totam natus. Pariatur, modi repellendus! Soluta ipsum, iste,
+                            sunt
+                            dignissimos delectus commodi harum sit maxime modi corrupti, sed rerum aspernatur illo dolore quod facilis atque ipsam enim ut veniam sapiente.
+                        </div>
+                    </div>
                 </Modal>
             </MainContent>
         </>
