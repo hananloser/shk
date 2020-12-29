@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import Input from './component/Input/Input';
+import Skleton from 'react-loading-skeleton';
 import { useForm } from 'react-hook-form'
 import { Cookies } from 'react-cookie';
 import { AuthToken } from '../../services/auth_token'
 import { API } from '../../services/api'
-import Input from './component/Input/Input';
 import { Button } from '../../compoents/button';
-
 type Login = {
 	email?: string,
 	password?: string
@@ -47,7 +47,7 @@ const Auth = () => {
 			<div className="hidden md:flex" style={{ height: '981px' }}  >
 				<img src="/nozzle.png" height="1024" />
 			</div>
-			<div className="w-full p-2 md:w-1/2 mt-52">
+			<div className="w-full p-2 md:w-1/2 mt-32 md:mt-52">
 				<div className="bg-gray-300 flex justify-center md:w-1/2 text-2xl font-bold tracking-widest p-4">
 					LOGO
 				</div>
@@ -64,7 +64,17 @@ const Auth = () => {
 							</Button>
 						</>
 					) : (
-							<p>Loading ...</p>
+							<>
+								<div className="loading w-full md:w-1/2">
+									<Skleton height={50} width={'100%'} />
+									<div className="divider my-5"></div>
+									<Skleton height={50} width={'100%'} />
+								</div>
+								<div className="loading w-full md:w-1/2">
+									<Skleton height={50} width={'60%'} />
+									<div className="divider my-5"></div>
+								</div>
+							</>
 						)
 					}
 				</form>
