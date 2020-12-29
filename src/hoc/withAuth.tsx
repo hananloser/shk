@@ -1,30 +1,40 @@
-import React, { useEffect } from 'react'
-import { Cookies } from 'react-cookie'
-import redirect from '../lib/redirect';
+import React, { Component } from 'react'
+import { NextPageContext } from 'next';
+import { AuthToken } from '../services/auth_token';
+import ServerCookies from 'next-cookies'
 
+export type AuthProps = {
+    auth: AuthToken
+}
 
-const cookie = new Cookies();
+export const withAuth = (WrappedComponent: any) => {
+    return class extends Component<AuthProps> {
+        static async getInitialProps(ctx: NextPageContext) {
+            const token = ServerCookies(ctx)['SHK']
+            const auth = new AuthToken(token)
+            const initialProps = { auth }
 
-export const withAuth = <T extends object>(Component: React.FC<T>) => {
-    const AuthComponent: React.FC<T> = (props) => {
-        const me = async () => {
-            const response = await fetch('https://shk-backend.test/api/v1/me', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + cookie.get('token')
-                }
-            });
-            if (response.status == 401 || cookie.get('token') == null) {
-                redirect('error', '/')
+            if (auth.isExpired || token === undefined || !auth.isValid) {
+                ctx.res?.writeHead(302, {
+                    Location: '/'
+                })
+                ctx.res?.end()
             }
+            if (WrappedComponent.getInitialProps) return WrappedComponent.getInitialProps(initialProps);
+            return initialProps
         }
-        useEffect(() => {
-            me();
-        }, [])
 
-        return (
-            <Component {...props} />
-        )
+        get auth() {
+            // the server pass to the client serializes the token
+            // so we have to reinitialize the authToken class
+            //
+            // @see https://github.com/zeit/next.js/issues/3536
+            return new AuthToken(this.props.auth.token);
+        }
+
+
+        render() {
+            return <WrappedComponent  {...this.props}  />
+        }
     }
-    return AuthComponent
 }

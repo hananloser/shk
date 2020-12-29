@@ -8,7 +8,7 @@ const cookie = new Cookies();
 export const withoutAuth = <T extends object>(Component: React.FC<T>) => {
     const AuthComponent: React.FC<T> = (props) => {
         const me = async () => {
-            const response = await fetch('https://shk-backend.test/api/v1/me', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/me`, {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + cookie.get('token')
@@ -21,7 +21,7 @@ export const withoutAuth = <T extends object>(Component: React.FC<T>) => {
         useEffect(() => {
             me();
         }, [])
-
+  
         return (
             <Component {...props} />
         )
