@@ -6,6 +6,7 @@ import { Cookies } from 'react-cookie';
 import { AuthToken } from '../../services/auth_token'
 import { API } from '../../services/api'
 import { Button } from '../../compoents/button';
+
 type Login = {
 	email?: string,
 	password?: string
