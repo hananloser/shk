@@ -14,7 +14,7 @@ export enum Size {
 
 
 type Props = {
-    size: keyof typeof Size,
+    size?: keyof typeof Size,
     color?: keyof typeof Color,
     customClass?: string
 }
