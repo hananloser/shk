@@ -44,10 +44,10 @@ const Auth = () => {
 
 	return (
 		<div className="flex md:justify-between min-h-full">
-			<div className="hidden md:flex" style={{ height: '981px' }}  >
+			<div className="hidden md:flex" style={{ height: '100vh' }}  >
 				<img src="/nozzle.png" height="1024" />
 			</div>
-			<div className="w-full p-2 md:w-1/2 mt-32 md:mt-52">
+			<div className="w-full p-2 lg:w-1/2  mt-32 md:mt-52">
 				<div className="bg-gray-300 flex justify-center md:w-1/2 text-2xl font-bold tracking-widest p-4">
 					LOGO
 				</div>
