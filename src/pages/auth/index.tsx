@@ -44,14 +44,14 @@ const Auth = () => {
 
 	return (
 		<div className="flex md:justify-between min-h-full">
-			<div className="hidden md:flex" style={{ height: '100vh' }}  >
+			<div className="hidden lg:flex" style={{ height: '100vh' }}  >
 				<img src="/nozzle.png" height="1024" />
 			</div>
-			<div className="w-full p-2 lg:w-1/2  mt-32 md:mt-52">
-				<div className="bg-gray-300 flex justify-center md:w-1/2 text-2xl font-bold tracking-widest p-4">
+			<div className="w-full p-2 lg:w-1/2  mt-32 lg:mt-52">
+				<div className="bg-gray-300 flex justify-center lg:w-1/2 text-2xl font-bold tracking-widest p-4">
 					LOGO
 				</div>
-				<div className="flex justify-center md:w-1/2 text-4xl mb-16 mt-10 font-bold">
+				<div className="flex justify-center lg:w-1/2 text-4xl mb-16 mt-10 font-bold">
 					<span>Selamat Datang di SHK</span>
 				</div>
 				<form className="flex p-3 flex-col space-y-5" onSubmit={handleSubmit(handleForm)}>
@@ -59,18 +59,18 @@ const Auth = () => {
 						<>
 							<Input name="email" type="email" placeholder="Nama Pengguna" autoComplete="off" variant='widest' ref={register({ required: true })} />
 							<Input name="password" type="password" placeholder="Kata Sandi" autoComplete="off" variant='widest' />
-							<Button type='submit' className="w-full md:w-1/2 p-12" textVariant="bold" size='large' variant='primary'>
+							<Button type='submit' className="w-full lg:w-1/2 p-12" textVariant="bold" size='large' variant='primary'>
 								Masuk
 							</Button>
 						</>
 					) : (
 							<>
-								<div className="loading w-full md:w-1/2">
+								<div className="loading w-full lg:w-1/2">
 									<Skleton height={50} width={'100%'} />
 									<div className="divider my-5"></div>
 									<Skleton height={50} width={'100%'} />
 								</div>
-								<div className="loading w-full md:w-1/2">
+								<div className="loading w-full lg:w-1/2">
 									<Skleton height={50} width={'60%'} />
 									<div className="divider my-5"></div>
 								</div>

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react'
 
 export enum Variant {
-    widest = 'w-full md:w-1/2',
+    widest = 'w-full lg:w-1/2',
     half = 'w-1/2'
 }
 
