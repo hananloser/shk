@@ -1,5 +1,5 @@
 import reduxThunk, { ThunkMiddleware } from 'redux-thunk';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { StationAction } from './actions/StationActions';
 import { stationReducer, StationState } from './reducers/StationReducer';
