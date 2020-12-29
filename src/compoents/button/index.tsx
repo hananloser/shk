@@ -7,7 +7,7 @@ export enum BtnType {
 }
 
 export enum Variant {
-    primary = 'border-2 border-transparent bg-primary hover:bg-primary-900',
+    primary = 'border-2 border-transparent bg-red-700 hover:bg-red-600',
     secondary = 'border-2 border-transparent bg-white text-primary-500',
     silent = 'border-2 border-transparent bg-transparent text-primary-500',
     outline = 'border-2 border-gray-600 text-primary-500 transition duration-100 hover:bg-gray-600 hover:bg-opacity-10',
@@ -56,7 +56,7 @@ export const Button: React.FC<Props> = function ({
         return null;
 
     const className = clsx(
-        'font-body inline-flex items-center justify-center rounded text-white leading-none tracking-wide whitespace-no-wrap',
+        'font-body inline-flex items-center justify-center rounded-xl text-white leading-none tracking-wide whitespace-no-wrap focus:outline-none',
         Variant[variant],
         TextVariant[textVariant],
         Size[size],
