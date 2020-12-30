@@ -23,7 +23,7 @@ const Admin = () => {
                 </Button>
             </div>
             <div className="flex justify-center mb-16 mt-16">
-                <div className="grid grid-flow-row grid-cols-1 grid-rows-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div className="grid grid-flow-row grid-cols-1 grid-rows-2 gap-7 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-7  md:gap-7 ">
                     <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
                     <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
                     <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />

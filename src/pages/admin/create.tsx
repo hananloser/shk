@@ -8,13 +8,13 @@ const Create = () => {
         <div>
             <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" />
             <div className="flex flex-col z-20">
-                <div className="mt-28 flex justify-center">
+                <div className="mt-10 flex justify-center">
                     <div className="flex flex-col justify-center items-center space-y-3">
                         <span className="font-roboto text-2xl font-bold mt-24">TAMBAH SPBU</span>
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center px-16 mt-16">
+            <div className="flex justify-center px-16 mt-10">
                 <div className="card-add w-full bg-alt py-10 rounded-lg space-y-4">
                     <div className="flex items-center mx-2">
                         <div className="label w-1/6 ml-2">
