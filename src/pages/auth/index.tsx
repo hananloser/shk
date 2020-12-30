@@ -23,7 +23,6 @@ const Auth = () => {
 
 	const handleForm = ({ email, password }: Login) => {
 		login({ email, password });
-		setLoading(false)
 	}
 
 	useEffect(() => {
@@ -31,14 +30,11 @@ const Auth = () => {
 	}, [token])
 
 	const login = async ({ email, password }: Login) => {
-		console.log(email , password)
 		setLoading(true);
 		const response = await API.post('/api/v1/login', { email, password })
 		const json = await response.data;
 		if (response.status == 200) {
 			await AuthToken.storeToken(json['access_token'])
-			setLoading(false);
-		} else if (response.status == 401) {
 			setLoading(false);
 		}
 		setLoading(false);
