@@ -7,13 +7,14 @@ export enum BtnType {
 }
 
 export enum Variant {
-    primary = 'border-2 border-transparent bg-red-700 hover:bg-red-600',
+    primary = 'border-2 border-transparent bg-red-700 hover:bg-red-600 font-semibold',
     secondary = 'border-2 border-transparent bg-white text-primary-500',
     silent = 'border-2 border-transparent bg-transparent text-primary-500',
-    outline = 'border-2 border-gray-600 text-primary-500 transition duration-100 hover:bg-gray-600 hover:bg-opacity-10',
+    outline = 'border-2 border-primary text-red-800 font-semibold transition duration-100 hover:bg-gray-600 hover:bg-opacity-10',
     outlineTextWhite = 'border-2 border-gray-600 text-white transition duration-100 hover:bg-gray-600 hover:bg-opacity-10',
     outlineLight = 'border-2 border-gray-300 hover:border-gray-400 text-primary-500 transition duration-100 hover:bg-gray-600 hover:bg-opacity-10',
     light = 'bg-white border-2 border-gray-400 hover:border-gray-500 text-primary-500',
+    alternative = 'border-2 border-transparent bg-yellow-300 hover:bg-yellow-400 font-semibold'
 }
 
 export enum TextVariant {
