@@ -6,6 +6,7 @@ import { Cookies } from 'react-cookie';
 import { AuthToken } from '../../services/auth_token'
 import { API } from '../../services/api'
 import { Button } from '../../compoents/button';
+import MemoShk from '../../assets/icons/Shk';
 
 type Login = {
 	email?: string,
@@ -30,14 +31,15 @@ const Auth = () => {
 	}, [token])
 
 	const login = async ({ email, password }: Login) => {
-		setLoading(true);
-		const response = await API.post('/api/v1/login', { email, password })
-		const json = await response.data;
-		if (response.status == 200) {
+		try {
+			setLoading(true);
+			const response = await API.post('/api/v1/login', { email, password })
+			const json = await response.data;
 			await AuthToken.storeToken(json['access_token'])
 			setLoading(false);
+		} catch (error) {
+			setLoading(false)
 		}
-		setLoading(false);
 	}
 
 	return (
@@ -46,11 +48,11 @@ const Auth = () => {
 				<img src="/nozzle.png" height="1024" />
 			</div>
 			<div className="w-full p-2 lg:w-1/2  mt-32 lg:mt-52">
-				<div className="bg-gray-300 flex justify-center lg:w-1/2 text-2xl font-bold tracking-widest p-4">
-					LOGO
+				<div className="flex justify-center lg:w-1/2 text-2xl font-bold tracking-widest p-4">
+					<MemoShk className="text-9xl" />					
 				</div>
-				<div className="flex justify-center lg:w-1/2 text-4xl mb-16 mt-10 font-bold">
-					<span>Selamat Datang di SHK</span>
+				<div className="flex justify-center lg:w-1/2 text-4xl mb-10 font-bold">
+					<span>Selamat Datang</span>
 				</div>
 				<form className="flex p-3 flex-col space-y-5" onSubmit={handleSubmit(handleForm)}>
 					{!loading ? (
