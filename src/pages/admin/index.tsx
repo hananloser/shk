@@ -1,5 +1,8 @@
 import React from 'react'
+import { Button } from '../../compoents/button'
+import CardSpbu from '../../compoents/CardSpbu'
 import Header from '../../compoents/Header/Index'
+import Input from '../auth/component/Input/Input'
 
 const Admin = () => {
     return (
@@ -11,6 +14,28 @@ const Admin = () => {
                         <span className="font-roboto text-5xl font-bold mt-24">SELAMAT DATANG ADMIN</span>
                         <span className="font-roboto text-xl font-bold">Halaman Hanya Bisa Di Akses Oleh Admin</span>
                     </div>
+                </div>
+            </div>
+            <div className="flex justify-center space-x-3 mt-20">
+                <Input name="search" placeholder="Cari SPBU" variant='widest' />
+                <Button type="button" onClick={() => alert('test')} size='small'>
+                    Tambah
+                </Button>
+            </div>
+            <div className="flex justify-center mb-16 mt-16">
+                <div className="grid grid-flow-row grid-cols-5 grid-rows-2 gap-4">
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                    <CardSpbu name="SPBU A" image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
                 </div>
             </div>
         </div>

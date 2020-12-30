@@ -26,7 +26,7 @@ type Props = {
 }
 
 const Header = ({ variant = 'manager', title , variantUser , variantTitle }: Props) => {
-    const classHeader = clsx('header px-5 shadow w-full h-24 flex justify-between items-center md:px-16 fixed', Variant[variant])
+    const classHeader = clsx('header px-5 shadow w-full h-24 flex justify-between items-center md:px-16 fixed z-50', Variant[variant])
     const classUsername = clsx('font-bold  mt-1', VariantUser[variantUser])
     const classTitle = clsx('text-3xl font-bold font-roboto' , VariantTitle[variantTitle])
     
