@@ -1,8 +1,4 @@
 import React from 'react'
-import MemoTrendingDown from '../../assets/icons/TrendingDown'
-import MemoTrendingUp from '../../assets/icons/TrendingUp'
-import MemoWallet from '../../assets/icons/Wallet'
-import { Card } from '../../compoents/card'
 import Header from '../../compoents/Header/Index'
 import Sidebar from '../../compoents/Sidebar'
 import { withAuth } from '../../hoc/withAuth'
