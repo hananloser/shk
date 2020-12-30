@@ -2,7 +2,6 @@ import React from 'react'
 import { useSWRInfinite } from 'swr'
 import { Button } from '../../compoents/button'
 import MainContent from '../../compoents/container/MainContent'
-import Header from '../../compoents/Header/Index'
 import Modal from '../../compoents/Modal'
 import { Tbody, TbodyContentWrapper } from '../../compoents/Table/Tbody'
 import { Thead, TheadWrapper } from '../../compoents/Table/Thead'
@@ -20,7 +19,6 @@ const Product = () => {
     return (
         <>
             <MainContent>
-                <Header />
                 <div className="flex justify-between  px-24 py-2">
                     <header className="text-3xl font-semibold text-gray-800">Produk</header>
                     <Button variant='primary' textVariant='bold' size='xlarge' type='button' onClick={() => setModal(!modal)}>

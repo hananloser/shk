@@ -15,7 +15,7 @@ const Sidebar = () => {
         { name: "Neraca", path: "/neraca" },
     ]
     return (
-        <div className="hidden md:flex flex-col bg-secondry fixed h-screen w-80 px-2">
+        <div className="hidden md:flex flex-col bg-secondry fixed h-screen w-80 px-2 mt-24">
             <div className="flex item-center dashboard-logo mx-auto mt-5 text-white bg-primary font-roboto font-bold w-full px-4 py-3 rounded-lg ">
                 <MemoDashboard className="text-2xl mt-1 mx-2" />
                 <span className="tracking text-2xl rounded-2xl">Dashboard</span>

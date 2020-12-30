@@ -10,7 +10,9 @@ const MainContent = ({ children }: Props) => {
         <>
             <Sidebar />
             <div className="flex flex-col md:ml-80 z-20">
-                {children}
+                <div className="main-content mt-28">
+                    {children}
+                </div>
             </div>
         </>
     )
