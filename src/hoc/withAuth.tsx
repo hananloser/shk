@@ -31,8 +31,6 @@ export const withAuth = (WrappedComponent: any) => {
             // @see https://github.com/zeit/next.js/issues/3536
             return new AuthToken(this.props.auth.token);
         }
-
-
         render() {
             return <WrappedComponent  {...this.props}  />
         }

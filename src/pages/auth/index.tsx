@@ -23,6 +23,7 @@ const Auth = () => {
 
 	const handleForm = ({ email, password }: Login) => {
 		login({ email, password });
+		setLoading(false)
 	}
 
 	useEffect(() => {
@@ -30,6 +31,7 @@ const Auth = () => {
 	}, [token])
 
 	const login = async ({ email, password }: Login) => {
+		console.log(email , password)
 		setLoading(true);
 		const response = await API.post('/api/v1/login', { email, password })
 		const json = await response.data;
@@ -38,9 +40,8 @@ const Auth = () => {
 			setLoading(false);
 		} else if (response.status == 401) {
 			setLoading(false);
-		} else {
-			setLoading(false)
 		}
+		setLoading(false);
 	}
 
 	return (
@@ -59,7 +60,7 @@ const Auth = () => {
 					{!loading ? (
 						<>
 							<Input name="email" type="email" placeholder="Nama Pengguna" autoComplete="off" variant='widest' ref={register({ required: true })} />
-							<Input name="password" type="password" placeholder="Kata Sandi" autoComplete="off" variant='widest' />
+							<Input name="password" type="password" placeholder="Kata Sandi" autoComplete="off" variant='widest' ref={register({ required: true })} />
 							<Button type='submit' className="w-full lg:w-1/2 p-12" textVariant="bold" size='large' variant='primary'>
 								Masuk
 							</Button>

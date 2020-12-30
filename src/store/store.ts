@@ -16,7 +16,6 @@ const rootReducer = combineReducers<RootState>({
 
 export type RootActions = StationAction; // adding pipeline for multiple RootActions
 
-
 export const store = createStore(
     rootReducer,
     composeWithDevTools(
