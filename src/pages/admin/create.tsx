@@ -2,8 +2,11 @@ import React from 'react'
 import { Button } from '../../compoents/button'
 import Header from '../../compoents/Header/Index'
 import Inputs from '../../compoents/Inputs/Inputs'
-
+import router from 'next/router'
+import Modal from '../../compoents/Modal'
+import { useModal } from '../../providers/ModalProvider'
 const Create = () => {
+    const {modal , setModal} = useModal()
     return (
         <div>
             <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" />
@@ -87,20 +90,27 @@ const Create = () => {
                         </div>
                     </div>
                     <div className="flex ml-2 justify-between pt-3 ">
-                        <Button type="button" onClick={() => alert('test')} variant='alternative'>
+                        <Button type="button" onClick={() => setModal(!modal)} variant='alternative'>
                             Tambahkan foto
                         </Button>
                         <div className="flex pr-24 space-x-4">
                             <Button type="button" onClick={() => alert('test')}>
                                 Simpan
                             </Button>
-                            <Button type="button" onClick={() => alert('test')} variant='outline'>
+                            <Button type="button" onClick={() => router.push('/admin')} variant='outline'>
                                 Batalkan
                             </Button>
                         </div>
                     </div>
                 </div>
             </div>
+            <Modal>
+                <div className="p-2">
+                    <div className="flex flex-col item-center justify-center space-y-4 h-44">
+                        <span className="text-4xl font-bold">TODO Dropdown ZONE</span>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }

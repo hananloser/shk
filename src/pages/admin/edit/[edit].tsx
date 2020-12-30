@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from '../../../compoents/button'
 import Header from '../../../compoents/Header/Index'
 import Inputs from '../../../compoents/Inputs/Inputs'
-
+import router from 'next/router'
 const Edit = () => {
     return (
         <div>
@@ -88,13 +88,13 @@ const Edit = () => {
                     </div>
                     <div className="flex ml-2 justify-between pt-3 ">
                         <Button type="button" onClick={() => alert('test')} variant='alternative'>
-                            Tambahkan foto
+                            Edit foto
                         </Button>
                         <div className="flex pr-24 space-x-4">
                             <Button type="button" onClick={() => alert('test')}>
                                 Simpan
                             </Button>
-                            <Button type="button" onClick={() => alert('test')} variant='outline'>
+                            <Button type="button" onClick={() => router.back()} variant='outline'>
                                 Batalkan
                             </Button>
                         </div>
