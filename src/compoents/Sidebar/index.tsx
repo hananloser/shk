@@ -1,9 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-
+import MemoDashboard from '../../assets/icons/Dashboard'
 const Sidebar = () => {
     const menu = [
-        { name: "Dashboard", path: '/dashboard' },
         { name: "Produk", path: '/product' },
         { name: "Laporan Harian", path: '/report' },
         { name: "Stok Minyak", path: '/stock' },
@@ -16,19 +15,20 @@ const Sidebar = () => {
         { name: "Neraca", path: "/neraca" },
     ]
     return (
-        <div className="hidden md:flex flex-col bg-primary fixed  h-screen  w-80">
-            <div className="relative top-5 left-20  ">
-
-                <span className="font-bold text-5xl text-white">Logo</span>
+        <div className="hidden md:flex flex-col bg-secondry fixed h-screen w-80 px-2">
+            <div className="flex item-center dashboard-logo mx-auto mt-5 text-white bg-primary font-roboto font-bold w-full px-4 py-3 rounded-lg ">
+                <MemoDashboard className="text-2xl mt-1 mx-2" />
+                <span className="tracking text-2xl rounded-2xl">Dashboard</span>
             </div>
-            <div className="flex top-48 left-8 relative">
-                <ul className="text-white font-bold text-xl space-y-3">
-                    {menu.map((item, index) => (
-                        <Link key={index} href={item.path}>
-                            <a><li key={index} className="hover:text-blue-300 cursor-pointer">{item.name}</li></a>
+            <div className="line bg-white h-0.5 mt-3"></div>
+            <div className="item-menu">
+                {menu.map((item, index) => (
+                    <ul key={index} className="text-white font-bold mx-auto my-5 ml-5 tracking-wide font-roboto">
+                        <Link href={item.path}>
+                            <a>{item.name}</a>
                         </Link>
-                    ))}
-                </ul>
+                    </ul>
+                ))}
             </div>
         </div>
     )
