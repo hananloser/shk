@@ -1,24 +1,10 @@
-import reduxThunk, { ThunkMiddleware } from 'redux-thunk';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { StationAction } from './actions/StationActions';
-import { stationReducer, StationState } from './reducers/StationReducer';
+import { createStore, applyMiddleware } from "redux";
+import RootReducer from "./reducers/rootReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
 
+const Store = createStore(RootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-export interface RootState {
-    readonly stations: StationState
-}
+export type RootStore = ReturnType<typeof RootReducer>
 
-const rootReducer = combineReducers<RootState>({
-    stations: stationReducer
-});
-
-
-export type RootActions = StationAction; // adding pipeline for multiple RootActions
-
-export const store = createStore(
-    rootReducer,
-    composeWithDevTools(
-        applyMiddleware(reduxThunk as ThunkMiddleware<RootState, RootActions>)
-    )
-);
+export default Store
