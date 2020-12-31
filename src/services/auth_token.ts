@@ -39,7 +39,6 @@ export class AuthToken {
     static async storeToken(token: string) {
         const cookies = new Cookies()
         cookies.set(TOKEN_KEY, token);
-        await router.push("/dashboard");
     }
 
     static async logout(){
