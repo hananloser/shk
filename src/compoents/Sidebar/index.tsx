@@ -1,7 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
 import MemoDashboard from '../../assets/icons/Dashboard'
-const Sidebar = () => {
+import router from 'next/router'
+import clsx from 'clsx'
+
+export enum Active {
+    active = 'bg-primary',
+    deactive = ''
+}
+
+interface Props {
+    active?: keyof typeof Active
+}
+
+const Sidebar = ({ active = 'deactive' }: Props) => {
     const menu = [
         { name: "Produk", path: '/product' },
         { name: "Laporan Harian", path: '/report' },
@@ -14,9 +26,12 @@ const Sidebar = () => {
         { name: "Laba Rugi", path: "/laba-rugi" },
         { name: "Neraca", path: "/neraca" },
     ]
+
+    const activeClass = clsx('flex item-center dashboard-logo mx-auto mt-5 text-white  font-roboto font-bold w-full px-4 py-3 rounded-lg cursor-pointer ', Active[active])
+
     return (
         <div className="hidden md:flex flex-col bg-secondry fixed h-screen w-80 px-2 mt-24 z-50">
-            <div className="flex item-center dashboard-logo mx-auto mt-5 text-white bg-primary font-roboto font-bold w-full px-4 py-3 rounded-lg ">
+            <div className={activeClass} onClick={() => router.push('/dashboard')}>
                 <MemoDashboard className="text-2xl mt-1 mx-2" />
                 <span className="tracking text-2xl rounded-2xl">Dashboard</span>
             </div>
