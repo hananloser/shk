@@ -44,6 +44,7 @@ const Auth = () => {
 				redirect(303, '/dashboard');
 			}
 		} catch (error) {
+			alert('Username Atau Password Salah')
 			setLoading(false)
 		}
 	}
