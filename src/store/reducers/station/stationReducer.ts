@@ -1,14 +1,9 @@
-import {
-    STATION_SUCCESS,
-    STATION_ERROR,
-    STATION_LOADING,
-    StationDispatchTypes,
-    StationType
-} from '../../actions/stations/stationActionTypes'
+import { StationDispatchTypes, StationType, STATION_ERROR, STATION_LOADING, STATION_SUCCESS } from "../../actions/stations/GET/stationActionTypes"
+
 
 interface InitialState {
     loading: boolean,
-    station?: StationType,
+    stations?: StationType,
 }
 
 const initialState: InitialState = {
@@ -24,7 +19,7 @@ export const stationReducer = (state: InitialState = initialState, action: Stati
         case STATION_SUCCESS:
             return {
                 loading: false,
-                station: action.payload
+                stations: action.payload
             }
         case STATION_ERROR:
             return {

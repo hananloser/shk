@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import MemoDots from '../../assets/icons/Dots'
 import { useModal } from '../../providers/ModalProvider'
 import router from 'next/router'
+import { Station } from '../../store/actions/stations/GET/stationActionTypes'
 interface Props {
     name?: string,
     image?: string,
+    station: Station
 }
 
-const CardSpbu = ({ name, image }: Props) => {
+const CardSpbu = ({ name, image, station }: Props) => {
     const [popUp, setPopUp] = useState<boolean | undefined>(false)
     const { modal, setModal } = useModal()
     return (
@@ -26,7 +28,7 @@ const CardSpbu = ({ name, image }: Props) => {
                 <div className="w-32 h-24 text-right bg-alt absolute top-7 right-5 rounded-lg px-3 py-3">
                     <div className="flex justify-end">
                         <ul className="font-bold font-sm">
-                            <li className="cursor-pointer" onClick={() => router.push('/admin/edit/1')}>Ubah Nama </li>
+                            <li className="cursor-pointer" onClick={() => router.push('/admin/edit/' + station.id)}>Ubah Nama </li>
                             <li className="cursor-pointer" onClick={() => setModal(!modal)}>Hapus</li>
                         </ul>
                     </div>

@@ -5,7 +5,6 @@ export const STATION_LOADING = 'STATION_LOADING'
 export const STATION_SUCCESS = 'STATION_SUCCESS'
 export const STATION_ERROR = 'STATION_ERROR'
 
-
 /**
  * FIELD From API
  */
@@ -37,4 +36,4 @@ export interface StationError {
     type: typeof STATION_ERROR
 }
 
-export type StationDispatchTypes = StationLoading | StationSuccess | StationError
+export type StationDispatchTypes = StationLoading | StationSuccess | StationError 
