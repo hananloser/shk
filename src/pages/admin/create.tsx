@@ -6,7 +6,7 @@ import router from 'next/router'
 import Modal from '../../compoents/Modal'
 import { useModal } from '../../providers/ModalProvider'
 const Create = () => {
-    const {modal , setModal} = useModal()
+    const { modal, setModal } = useModal()
     return (
         <div>
             <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" />
@@ -25,7 +25,7 @@ const Create = () => {
                             <span className="text-primary">*</span>
                         </div>
                         <div className="flex items-center w-full pr-24 flex-grow-0">
-                            <Inputs />
+                            <Inputs name="username" placeholder="Masukan username" />
                         </div>
                     </div>
                     <div className="flex items-center mx-2 justify-between">
@@ -34,7 +34,7 @@ const Create = () => {
                             <span className="text-primary">*</span>
                         </div>
                         <div className="items-center w-full pr-24 flex-grow-0">
-                            <Inputs />
+                            <Inputs name="password" placeholder="Masukan password" />
                         </div>
                     </div>
                     <div className="flex items-center mx-2">
@@ -43,7 +43,7 @@ const Create = () => {
                             <span className="text-primary">*</span>
                         </div>
                         <div className="flex items-center w-full pr-24">
-                            <Inputs />
+                            <Inputs name="name_station" placeholder="Masukan Nama SPBU" />
                         </div>
                     </div>
                     <div className="flex items-center mx-2">
@@ -52,7 +52,7 @@ const Create = () => {
                             <span className="text-primary">*</span>
                         </div>
                         <div className="flex items-center w-full pr-24">
-                            <Inputs />
+                            <Inputs name="no_station" placeholder="Masukan No SPBU" />
                         </div>
                     </div>
                     <div className="flex items-center mx-2">
@@ -61,16 +61,7 @@ const Create = () => {
                             <span className="text-primary">*</span>
                         </div>
                         <div className="flex items-center w-full pr-24">
-                            <Inputs />
-                        </div>
-                    </div>
-                    <div className="flex items-center mx-2">
-                        <div className="label w-1/6 ml-2">
-                            <span className="font-bold ">Username</span>
-                            <span className="text-primary">*</span>
-                        </div>
-                        <div className="flex items-center w-full pr-24">
-                            <Inputs />
+                            <Inputs name="location" placeholder="Masukan Lokasi SPBU" />
                         </div>
                     </div>
                     <div className="flex items-center mx-2 flex-shrink-0">
@@ -78,7 +69,7 @@ const Create = () => {
                             <span className="font-bold">No. Telpon SPBU</span>
                         </div>
                         <div className="flex items-center w-full pr-24">
-                            <Inputs />
+                            <Inputs name="phone_number" placeholder="Masukan Phone Number" />
                         </div>
                     </div>
                     <div className="flex items-center mx-2">
@@ -86,7 +77,7 @@ const Create = () => {
                             <span className="font-bold">Link Google Map</span>
                         </div>
                         <div className="flex items-center w-full pr-24">
-                            <Inputs />
+                            <Inputs name="location_link" placeholder="Masukan Lokasi link" />
                         </div>
                     </div>
                     <div className="flex ml-2 justify-between pt-3 ">
