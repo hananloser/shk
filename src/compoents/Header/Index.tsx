@@ -3,7 +3,6 @@ import React from 'react'
 import MemoAvatar from '../../assets/icons/Avatar'
 import MemoShk from '../../assets/icons/Shk'
 import { usePopup } from '../../providers/PopupProvider'
-import { useUser } from '../../providers/UserProvider'
 
 export enum Variant {
     manager = 'bg-alt',

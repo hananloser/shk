@@ -7,7 +7,6 @@ import { API } from '../../services/api'
 import { Button } from '../../compoents/button';
 import MemoShk from '../../assets/icons/Shk';
 import redirect from '../../lib/redirect';
-import { withAuth } from '../../hoc/withAuth';
 import jwtDecode from 'jwt-decode';
 import { Cookies } from 'react-cookie'
 
