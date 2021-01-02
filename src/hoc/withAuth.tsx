@@ -21,7 +21,10 @@ export const withAuth = (WrappedComponent: any) => {
                 ctx.res?.end()
             }
 
-            if (WrappedComponent.getInitialProps) return WrappedComponent.getInitialProps(initialProps);
+            if (WrappedComponent.getInitialProps) {
+                return WrappedComponent.getInitialProps(initialProps);
+            }
+
             return initialProps
         }
 
@@ -33,7 +36,7 @@ export const withAuth = (WrappedComponent: any) => {
             return new AuthToken(this.props.auth.token);
         }
         render() {
-            return <WrappedComponent  {...this.props} auth={AuthToken} />
+            return <WrappedComponent  {...this.props} auth={this.auth} />
         }
     }
 }

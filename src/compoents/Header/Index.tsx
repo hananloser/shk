@@ -3,6 +3,7 @@ import React from 'react'
 import MemoAvatar from '../../assets/icons/Avatar'
 import MemoShk from '../../assets/icons/Shk'
 import { usePopup } from '../../providers/PopupProvider'
+import { useUser } from '../../providers/UserProvider'
 
 export enum Variant {
     manager = 'bg-alt',
@@ -24,9 +25,10 @@ type Props = {
     variantUser: keyof typeof VariantUser,
     variantTitle: keyof typeof VariantUser,
     title?: string,
+    username?: string
 }
 
-const Header = ({ variant = 'manager', title, variantUser, variantTitle }: Props) => {
+const Header = ({ variant = 'manager', title, variantUser, variantTitle, username = '' }: Props) => {
     const { Popup, setPopup } = usePopup()
     const classHeader = clsx('header px-5 shadow w-full h-24 flex justify-between items-center md:px-16 fixed z-50', Variant[variant])
     const classUsername = clsx('font-bold  mt-1', VariantUser[variantUser])
@@ -41,7 +43,7 @@ const Header = ({ variant = 'manager', title, variantUser, variantTitle }: Props
             <div className="user-profile flex space-x-3 items-center relative">
                 <div className="logo-section">
                 </div>
-                <div className={classUsername}>Hanan Asyrawi</div>
+                <div className={classUsername}> {username} </div>
                 <MemoAvatar className="text-5xl ml-3 cursor-pointer" onClick={() => setPopup(!Popup)} />
                 {Popup && (
                     <div className="bg-alt absolute top-12 right-12 w-36 h-24 text-right p-4 shadow-lg">

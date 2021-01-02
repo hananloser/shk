@@ -3,6 +3,7 @@ import { Cookies } from 'react-cookie'
 import router from 'next/router'
 
 export type DecodedToken = {
+    name: string
     readonly username: string;
     readonly exp: number;
     readonly roles: string
@@ -13,7 +14,7 @@ const TOKEN_KEY = 'SHK';
 export class AuthToken {
     readonly decodeToken: DecodedToken
     constructor(readonly token?: string) {
-        this.decodeToken = { username: '', exp: 0, roles: '' }
+        this.decodeToken = { username: '', exp: 0, roles: '', name: '' }
         try {
             if (token) this.decodeToken = jwtDecode(token);
         } catch (e) {
@@ -46,6 +47,10 @@ export class AuthToken {
         const cookies = new Cookies()
         cookies.remove('SHK');
         await router.replace('/')
+    }
+
+    get name(): string {
+        return this.decodeToken.name
     }
 
 }

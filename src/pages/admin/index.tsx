@@ -1,22 +1,25 @@
 import React, { FormEvent, useEffect, useState } from 'react'
-import { Button } from '../../compoents/button'
 import CardSpbu from '../../compoents/CardSpbu'
 import Header from '../../compoents/Header/Index'
 import Modal from '../../compoents/Modal'
 import Input from '../auth/component/Input/Input'
 import router from 'next/router'
+import useDebounce from '../../lib/debaunce'
+import Skleton from 'react-loading-skeleton'
+import { Button } from '../../compoents/button'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetStation } from '../../store/actions/stations/GET/StationAction'
-import Skleton from 'react-loading-skeleton'
-import useDebounce from '../../lib/debaunce'
 import { RootStore } from '../../store/store'
 import { withAuth } from '../../hoc/withAuth'
-const Admin = () => {
+import { AuthToken } from '../../services/auth_token'
 
+const Admin = ({ auth }) => {
     const dispatch = useDispatch();
     const stationState = useSelector((state: RootStore) => state.stations);
     const [keyword, setKeyword] = useState<string>();
     const debouncedSearchTerm = useDebounce(keyword, 500);
+
+    const user: AuthToken = auth
 
     useEffect(() => {
         dispatch(GetStation(debouncedSearchTerm))
@@ -24,11 +27,11 @@ const Admin = () => {
 
     return (
         <div>
-            <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" />
+            <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" username={user.decodeToken.name.toUpperCase()} />
             <div className="flex flex-col z-20">
                 <div className="mt-28 flex justify-center">
                     <div className="flex flex-col justify-center items-center space-y-3">
-                        <span className="font-roboto text-2xl font-bold mt-24">SELAMAT DATANG ADMIN</span>
+                        <h1 className="font-roboto text-2xl font-bold mt-24">SELAMAT DATANG  {user.decodeToken.name.toUpperCase()} </h1>
                         <span className="font-roboto text-xl font-bold ">Halaman hanya bisa di akses admin</span>
                     </div>
                 </div>
