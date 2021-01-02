@@ -43,7 +43,7 @@ const Header = ({ variant = 'manager', title, variantUser, variantTitle, usernam
             <div className="user-profile flex space-x-3 items-center relative">
                 <div className="logo-section">
                 </div>
-                <div className={classUsername}> {username} </div>
+                <div className={classUsername}> {username.toUpperCase()} </div>
                 <MemoAvatar className="text-5xl ml-3 cursor-pointer" onClick={() => setPopup(!Popup)} />
                 {Popup && (
                     <div className="bg-alt absolute top-12 right-12 w-36 h-24 text-right p-4 shadow-lg">

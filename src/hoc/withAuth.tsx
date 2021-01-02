@@ -2,14 +2,18 @@ import React, { Component } from 'react'
 import { NextPageContext } from 'next';
 import { AuthToken } from '../services/auth_token';
 import ServerCookies from 'next-cookies'
+import { Cookies } from 'react-cookie';
 
 export type AuthProps = {
     auth: AuthToken
 }
-
+const cookies = new Cookies()
 export const withAuth = (WrappedComponent: any) => {
     return class extends Component<AuthProps> {
+
+
         static async getInitialProps(ctx: NextPageContext) {
+
             const token = ServerCookies(ctx)['SHK']
             const auth = new AuthToken(token)
             const initialProps = { auth }
@@ -22,7 +26,7 @@ export const withAuth = (WrappedComponent: any) => {
             }
 
             if (WrappedComponent.getInitialProps) {
-                return WrappedComponent.getInitialProps(initialProps);
+                return WrappedComponent.getInitialProps(ctx, initialProps);
             }
 
             return initialProps
@@ -33,7 +37,7 @@ export const withAuth = (WrappedComponent: any) => {
             // so we have to reinitialize the authToken class
             //
             // @see https://github.com/zeit/next.js/issues/3536
-            return new AuthToken(this.props.auth.token);
+            return new AuthToken(cookies.get('SHK') || this.props.auth?.token);
         }
         render() {
             return <WrappedComponent  {...this.props} auth={this.auth} />

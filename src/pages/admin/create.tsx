@@ -5,11 +5,16 @@ import Inputs from '../../compoents/Inputs/Inputs'
 import router from 'next/router'
 import Modal from '../../compoents/Modal'
 import { useModal } from '../../providers/ModalProvider'
-const Create = () => {
+import { withAuth } from '../../hoc/withAuth'
+import { AuthToken } from '../../services/auth_token'
+const Create = ({ auth }) => {
     const { modal, setModal } = useModal()
+
+    const user: AuthToken = auth
+
     return (
         <div>
-            <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" />
+            <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" username={user.decodeToken.name} />
             <div className="flex flex-col z-20">
                 <div className="mt-10 flex justify-center">
                     <div className="flex flex-col justify-center items-center space-y-3">
@@ -106,4 +111,4 @@ const Create = () => {
     )
 }
 
-export default Create
+export default withAuth(Create)

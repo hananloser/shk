@@ -93,4 +93,4 @@ const Auth = () => {
 	)
 }
 
-export default withAuth(Auth)
+export default Auth

@@ -1,31 +1,35 @@
 import React, { useEffect } from 'react'
 import Header from '../../../compoents/Header/Index'
 import Inputs from '../../../compoents/Inputs/Inputs'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { Button } from '../../../compoents/button'
-import { NextPageContext } from 'next'
 import { GetStationById } from '../../../store/actions/stations/GET_BY_ID/stationByIdAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStore } from '../../../store/store'
 import { useForm } from 'react-hook-form'
 import { Station } from '../../../store/actions/stations/GET_BY_ID/stationGetByIdTypes'
+import { withAuth } from '../../../hoc/withAuth'
+import { AuthToken } from '../../../services/auth_token'
 
-const Edit = ({ id }) => {
+const Edit = ({ auth }) => {
+    const user: AuthToken = auth
     const { handleSubmit, errors, register } = useForm<Station>()
     const dispatch = useDispatch();
     const stationById = useSelector((state: RootStore) => state.station);
 
+    const router = useRouter()
+    const { edit } = router.query
     const handleForm = (data) => {
         console.log(data)
     }
 
     useEffect(() => {
-        dispatch(GetStationById(id))
+        dispatch(GetStationById(edit as any))
     }, [])
 
     return (
         <div>
-            <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" />
+            <Header variant='admin' variantUser='admin' variantTitle="admin" title="Halaman Admin" username={user.decodeToken.name} />
             <div className="flex flex-col z-20">
                 <div className="mt-10 flex justify-center">
                     <div className="flex flex-col justify-center items-center space-y-3">
@@ -42,12 +46,15 @@ const Edit = ({ id }) => {
                                 <span className="text-primary">*</span>
                             </div>
                             <div className="flex items-center w-full pr-24 flex-grow-0">
-                                <Inputs
-                                    defaultValue={stationById.station?.data.name_station}
-                                    name="name_station"
-                                    placeholder="Masukan Nama"
-                                    ref={register({ required: true })}
-                                />
+                                {stationById.loading ? (<p>Loading ..</p>) : (
+                                    <Inputs
+                                        defaultValue={stationById.station?.data.name_station}
+                                        name="name_station"
+                                        placeholder="Masukan Nama"
+                                        ref={register({ required: true })}
+                                    />
+                                )}
+
                             </div>
                         </div>
                         <div className="flex items-center mx-2 justify-between">
@@ -56,12 +63,15 @@ const Edit = ({ id }) => {
                                 <span className="text-primary">*</span>
                             </div>
                             <div className="items-center w-full pr-24 flex-grow-0">
-                                <Inputs
-                                    defaultValue={stationById.station?.data.no_station}
-                                    name="no_station"
-                                    placeholder="Masukan Nomor SPBU"
-                                    ref={register({ required: true })}
-                                />
+                                {stationById.loading ? (<p>Loading ..</p>) : (
+                                    <Inputs
+                                        defaultValue={stationById.station?.data.no_station}
+                                        name="no_station"
+                                        autoComplete="off"
+                                        placeholder="Masukan Nomor SPBU"
+                                        ref={register({ required: true })}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="flex items-center mx-2">
@@ -70,12 +80,15 @@ const Edit = ({ id }) => {
                                 <span className="text-primary">*</span>
                             </div>
                             <div className="flex items-center w-full pr-24">
-                                <Inputs
-                                    defaultValue={stationById.station?.data.location}
-                                    name="location"
-                                    placeholder="Lokasi SPBU"
-                                    ref={register({ required: true })}
-                                />
+                                {stationById.loading ? (<p>Loading ..</p>) : (
+                                    <Inputs
+                                        defaultValue={stationById.station?.data.location}
+                                        autoComplete="off"
+                                        name="location"
+                                        placeholder="Lokasi SPBU"
+                                        ref={register({ required: true })}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="flex items-center mx-2">
@@ -84,12 +97,15 @@ const Edit = ({ id }) => {
                                 <span className="text-primary">*</span>
                             </div>
                             <div className="flex w-full pr-24">
-                                <Inputs
-                                    defaultValue={stationById.station?.data.phone_number}
-                                    name="phone_number"
-                                    placeholder="Masukan Lokasi SPBU"
-                                    ref={register({ required: true })}
-                                />
+                                {stationById.loading ? (<p>Loading ..</p>) : (
+                                    <Inputs
+                                        defaultValue={stationById.station?.data.phone_number}
+                                        name="phone_number"
+                                        autoComplete="off"
+                                        placeholder="Masukan Lokasi SPBU"
+                                        ref={register({ required: true })}
+                                    />
+                                )}
                                 {errors.phone_number && <span className="text-left text-primary mt-2">Field Link Google Tidak Boleh Kosong</span>}
                             </div>
                         </div>
@@ -99,12 +115,15 @@ const Edit = ({ id }) => {
                                 <span className="text-primary">*</span>
                             </div>
                             <div className="flex flex-col w-full pr-24">
-                                <Inputs
-                                    defaultValue={stationById.station?.data.location_link}
-                                    name="location_link"
-                                    placeholder="Masukan Lokasi Google Maps"
-                                    ref={register}
-                                />
+                                {stationById.loading ? (<p>Loading ..</p>) : (
+                                    <Inputs
+                                        defaultValue={stationById.station?.data.location_link}
+                                        name="location_link"
+                                        autoComplete="off"
+                                        placeholder="Masukan Lokasi Google Maps"
+                                        ref={register}
+                                    />
+                                )}
                                 {errors.location_link && <span className="text-left text-primary mt-2">Field Link Google Tidak Boleh Kosong</span>}
                             </div>
                         </div>
@@ -128,11 +147,10 @@ const Edit = ({ id }) => {
     )
 }
 
-Edit.getInitialProps = async (ctx: NextPageContext) => {
-    const id = ctx.query.edit
+Edit.getInitialProps = async () => {
     return {
-        id: id
+        test: '123'
     }
 }
 
-export default Edit
+export default withAuth(Edit)
