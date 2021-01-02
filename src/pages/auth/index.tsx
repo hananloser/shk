@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Input from './component/Input/Input';
 import Skleton from 'react-loading-skeleton';
 import { useForm } from 'react-hook-form'
-import { Cookies } from 'react-cookie';
 import { AuthToken } from '../../services/auth_token'
 import { API } from '../../services/api'
 import { Button } from '../../compoents/button';
 import MemoShk from '../../assets/icons/Shk';
 import redirect from '../../lib/redirect';
+import { withAuth } from '../../hoc/withAuth';
+import jwtDecode from 'jwt-decode';
+import { Cookies } from 'react-cookie'
+
+const cookies = new Cookies()
+
+type Token = {
+	roles: string
+}
+
 
 type Login = {
 	username: string,
@@ -19,29 +28,23 @@ const Auth = () => {
 
 	const { register, handleSubmit } = useForm<Login>()
 
-	const [token, setToken] = useState<string | null>();
-
-	const cookies = new Cookies()
-
 	const handleForm = ({ username, password }: Login) => {
 		login({ username, password });
 	}
-
-	useEffect(() => {
-		setToken(cookies.get('token'))
-	}, [token])
-
+	/** @todo move to redux */
 	const login = async ({ username, password }: Login) => {
 		setLoading(true);
 		try {
 			const response = await API.post('/api/v1/login', { username, password })
-			console.log(response.status)
 			if (response.status == 200) {
 				const json = await response.data;
-				console.log(json)
 				await AuthToken.storeToken(json.access_token)
-				setLoading(false);
-				redirect(303, '/dashboard');
+			}
+			const token: Token = jwtDecode(cookies.get('SHK'));
+			if (token.roles === 'admin') {
+				redirect(302, '/admin')
+			} else {
+				redirect(302, '/dashboard')
 			}
 		} catch (error) {
 			alert('Username Atau Password Salah')
@@ -90,4 +93,4 @@ const Auth = () => {
 	)
 }
 
-export default Auth
+export default withAuth(Auth)

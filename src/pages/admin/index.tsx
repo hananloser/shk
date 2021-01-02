@@ -10,6 +10,7 @@ import { GetStation } from '../../store/actions/stations/GET/StationAction'
 import Skleton from 'react-loading-skeleton'
 import useDebounce from '../../lib/debaunce'
 import { RootStore } from '../../store/store'
+import { withAuth } from '../../hoc/withAuth'
 const Admin = () => {
 
     const dispatch = useDispatch();
@@ -91,4 +92,4 @@ export const Loading = () => {
     );
 }
 
-export default Admin
+export default withAuth(Admin)

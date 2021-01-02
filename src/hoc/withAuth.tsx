@@ -14,12 +14,13 @@ export const withAuth = (WrappedComponent: any) => {
             const auth = new AuthToken(token)
             const initialProps = { auth }
 
-            if (auth.isExpired || token === undefined || !auth.isValid) {
+            if (auth.isExpired || token === undefined || !auth.isValid || auth.decodeToken.roles === "manager") {
                 ctx.res?.writeHead(302, {
                     Location: '/'
                 })
                 ctx.res?.end()
             }
+
             if (WrappedComponent.getInitialProps) return WrappedComponent.getInitialProps(initialProps);
             return initialProps
         }
@@ -32,7 +33,7 @@ export const withAuth = (WrappedComponent: any) => {
             return new AuthToken(this.props.auth.token);
         }
         render() {
-            return <WrappedComponent  {...this.props}  />
+            return <WrappedComponent  {...this.props} auth={AuthToken} />
         }
     }
 }
