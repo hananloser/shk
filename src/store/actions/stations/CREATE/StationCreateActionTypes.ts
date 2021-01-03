@@ -32,3 +32,6 @@ export interface StationCreateFail {
     type: typeof STATION_CREATE_FAIL
     message: string | Object | undefined
 }
+
+
+export type StationActionDispatch = | StationCreateLoading | StationCreateSuccess | StationCreateFail
