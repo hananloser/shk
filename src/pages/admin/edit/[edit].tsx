@@ -3,7 +3,7 @@ import Header from '../../../compoents/Header/Index'
 import Inputs from '../../../compoents/Inputs/Inputs'
 import { useRouter } from 'next/router'
 import { Button } from '../../../compoents/button'
-import { GetStationById } from '../../../store/actions/stations/GET_BY_ID/stationByIdAction'
+import { GetStationById, updateStation } from '../../../store/actions/stations/GET_BY_ID/stationByIdAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStore } from '../../../store/store'
 import { useForm } from 'react-hook-form'
@@ -20,7 +20,8 @@ const Edit = ({ auth }) => {
     const router = useRouter()
     const { edit } = router.query
     const handleForm = (data) => {
-        console.log(data)
+        dispatch(updateStation(edit as any, data))
+        router.back();
     }
 
     useEffect(() => {

@@ -1,19 +1,26 @@
 import React, { useState } from 'react'
 import MemoDots from '../../assets/icons/Dots'
-import { useModal } from '../../providers/ModalProvider'
 import router from 'next/router'
 import { Station } from '../../store/actions/stations/GET/stationActionTypes'
+import { useModal } from '../../providers/ModalProvider'
 interface Props {
     name?: string,
     image?: string,
-    station: Station
+    station: Station,
+    handleId: (stationId) => void
 }
 
-const CardSpbu = ({ name, image, station }: Props) => {
+const CardSpbu = ({ name, image, station, handleId }: Props) => {
+
     const [popUp, setPopUp] = useState<boolean | undefined>(false)
     const { modal, setModal } = useModal()
+    const triggerModal = () => {
+        handleId(station.id)
+        setModal(!modal)
+    }
+
     return (
-        <div className="ml-2 w-80 bg-gray-200 h-60 rounded-lg relative transform hover:scale-105 duration-200 ease-out">
+        <div className="ml-2 w-80 bg-gray-200 h-60 rounded-lg relative transform hover:scale-105 duration-200 ease-out" >
             <img
                 src={image} alt="images"
                 width="240"
@@ -29,7 +36,7 @@ const CardSpbu = ({ name, image, station }: Props) => {
                     <div className="flex justify-end">
                         <ul className="font-bold font-sm">
                             <li className="cursor-pointer" onClick={() => router.push('/admin/edit/' + station.id)}>Ubah Nama </li>
-                            <li className="cursor-pointer" onClick={() => setModal(!modal)}>Hapus</li>
+                            <li className="cursor-pointer" onClick={() => triggerModal()}>Hapus</li>
                         </ul>
                     </div>
                 </div>

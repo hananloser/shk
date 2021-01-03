@@ -12,6 +12,8 @@ import { GetStation } from '../../store/actions/stations/GET/StationAction'
 import { RootStore } from '../../store/store'
 import { withAuth } from '../../hoc/withAuth'
 import { AuthToken } from '../../services/auth_token'
+import { useModal } from '../../providers/ModalProvider'
+import { deleteStation } from '../../store/actions/stations/GET_BY_ID/stationByIdAction'
 
 const Admin = ({ auth }) => {
     const dispatch = useDispatch();
@@ -19,7 +21,29 @@ const Admin = ({ auth }) => {
     const [keyword, setKeyword] = useState<string>();
     const debouncedSearchTerm = useDebounce(keyword, 500);
 
+    const imageUrl = 'https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
+
     const user: AuthToken = auth
+
+    const { modal, setModal } = useModal()
+
+    const [id, setId] = useState<string>()
+
+    const passingId = (stationId) => {
+        setId(stationId)
+    }
+
+    const handleDeleteStation = (stationId: string) => {
+        dispatch(deleteStation(stationId))
+        dispatch(GetStation(debouncedSearchTerm))
+        setModal(false)
+    }
+
+    /**
+     * Buat state untuk tampung id yang akan di hapus 
+     * Buat Callback 
+     * Accept Data nya di modal
+     */
 
     useEffect(() => {
         dispatch(GetStation(debouncedSearchTerm))
@@ -46,7 +70,7 @@ const Admin = ({ auth }) => {
             <div className="flex justify-center mb-16 mt-16">
                 <div className="grid grid-flow-row grid-cols-1 grid-rows-2 gap-7 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-7  md:gap-7 ">
                     {!stationState.loading && stationState.stations?.data.map(item => (
-                        <CardSpbu station={item} key={item.id} name={item.name_station} image="https://images.unsplash.com/photo-1609287873146-a72edea964b7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+                        <CardSpbu station={item} key={item.id} name={item.name_station} image={imageUrl} handleId={passingId} />
                     ))}
                 </div>
             </div>
@@ -60,12 +84,12 @@ const Admin = ({ auth }) => {
             <Modal>
                 <div className="p-2">
                     <div className="flex flex-col item-center justify-center space-y-4 h-44">
-                        <span className="text-4xl font-bold">Tojeng Ki ini iyya ?  ?</span>
+                        <span className="text-4xl font-bold">Apa Anda Yakin ?</span>
                         <div className="flex space-x-4 justify-center items-center">
-                            <Button type="button" onClick={() => alert('test')} size='small'>
+                            <Button type="button" onClick={() => handleDeleteStation(id as any)} size='small'>
                                 Hapus
                             </Button>
-                            <Button type="button" onClick={() => alert('test')} size='small' variant="outline">
+                            <Button type="button" onClick={() => setModal(!modal)} size='small' variant="outline">
                                 Batal
                             </Button>
                         </div>
