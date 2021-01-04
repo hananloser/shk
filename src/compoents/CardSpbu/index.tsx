@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import MemoDots from '../../assets/icons/Dots'
 import router from 'next/router'
+
+import MemoDots from '../../assets/icons/Dots'
 import { Station } from '../../store/actions/stations/GET/stationActionTypes'
 import { useModal } from '../../providers/ModalProvider'
 interface Props {
@@ -14,6 +15,7 @@ const CardSpbu = ({ name, image, station, handleId }: Props) => {
 
     const [popUp, setPopUp] = useState<boolean | undefined>(false)
     const { modal, setModal } = useModal()
+
     const triggerModal = () => {
         handleId(station.id)
         setModal(!modal)

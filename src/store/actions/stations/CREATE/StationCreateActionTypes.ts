@@ -26,11 +26,13 @@ export interface StationCreateLoading {
 export interface StationCreateSuccess {
     type: typeof STATION_CREATE_SUCCESS
     payload: StationCreate
+    code: string | number
 }
 
 export interface StationCreateFail {
     type: typeof STATION_CREATE_FAIL
-    message: string | Object | undefined
+    message: StationCreate
+    code: string | number
 }
 
 

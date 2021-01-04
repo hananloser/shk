@@ -16,8 +16,9 @@ export const STATION_UPDATE_SUCCESS = 'STATION_UPDATE_SUCCESS'
 export const STATION_UPDATE_FAIL = 'STATION_UPDATE_FAIL'
 
 
+export const STATION_BY_ID_DELETED_LOADING = 'STATION_BY_ID_DELETED_LOADING'
 export const STATION_BY_ID_DELETED = 'STATION_BY_ID_DELETED'
-
+export const STATION_BY_ID_DELETED_FAIL = 'STATION_BY_ID_DELETED_FAIL'
 
 /**
  * FIELD From API
@@ -72,9 +73,18 @@ export interface StationUpdateFail {
     error: any
 }
 
+export interface StationDeleteLoading {
+    type: typeof STATION_BY_ID_DELETED_LOADING
+}
+
 export interface StationDelete {
     type: 'STATION_BY_ID_DELETED',
     message: string
+}
+
+export interface StationDeleteFail {
+    type: typeof STATION_BY_ID_DELETED_FAIL,
+    message: string | Object
 }
 
 
@@ -86,3 +96,5 @@ export type StationByIdDispatchTypes =
     | StationUpdateSuccess
     | StationUpdateFail
     | StationDelete
+    | StationDeleteFail
+    | StationDeleteLoading

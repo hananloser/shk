@@ -18,6 +18,7 @@ import { deleteStation } from '../../store/actions/stations/GET_BY_ID/stationByI
 const Admin = ({ auth }) => {
     const dispatch = useDispatch();
     const stationState = useSelector((state: RootStore) => state.stations);
+    const deletedStation = useSelector((state: RootStore) => state.station);
     const [keyword, setKeyword] = useState<string>();
     const debouncedSearchTerm = useDebounce(keyword, 500);
 
@@ -35,8 +36,7 @@ const Admin = ({ auth }) => {
 
     const handleDeleteStation = (stationId: string) => {
         dispatch(deleteStation(stationId))
-        dispatch(GetStation(debouncedSearchTerm))
-        setModal(false)
+        setModal(!modal)
     }
 
     /**
@@ -47,7 +47,7 @@ const Admin = ({ auth }) => {
 
     useEffect(() => {
         dispatch(GetStation(debouncedSearchTerm))
-    }, [debouncedSearchTerm])
+    }, [debouncedSearchTerm, deletedStation.deleted])
 
     return (
         <div>

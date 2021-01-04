@@ -33,10 +33,10 @@ export const updateStation = (stationId: string, station: Station) => async (dis
 
 export const deleteStation = (stationId: string) => async (dispatch: Dispatch<StationByIdDispatchTypes>) => {
     try {
-        dispatch({ type: 'STATION_BY_ID_LOADING' });
-        
+        dispatch({ type: 'STATION_BY_ID_DELETED_LOADING' });
+
         const res = await API.delete(`api/v1/stations/${stationId}`, { headers: { 'Authorization': 'Bearer ' + cookies.get('SHK') } });
-        
+
         dispatch({ type: 'STATION_BY_ID_DELETED', message: res.data.message })
 
     } catch (error) {
