@@ -16,11 +16,10 @@ import { RootStore } from '../../store/store'
 const Create = ({ auth }) => {
     const dispatch = useDispatch()
     const { modal, setModal } = useModal()
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, errors } = useForm()
     const stationCreate = useSelector((state: RootStore) => state.stationCreate)
     const user: AuthToken = auth
     const router = useRouter()
-    console.log(stationCreate.error)
     const handleForm = (data) => {
         dispatch(storeStation(data))
         if (stationCreate.loading === false && stationCreate.code !== 422) {
@@ -49,6 +48,7 @@ const Create = ({ auth }) => {
                             <div className="flex flex-col w-full md:pr-24 flex-grow-0">
                                 <Inputs name="username" placeholder="Masukan username" ref={register({ required: true })} autoComplete="off" />
                                 <p className="text-primary">{stationCreate.error?.username}</p>
+                                {errors.username && (<p className="text-primary">Username Tidak Boleh Kosong</p>)}
                             </div>
                         </div>
                         <div className="flex items-center mx-2">
@@ -56,9 +56,10 @@ const Create = ({ auth }) => {
                                 <span className="font-bold">Name</span>
                                 <span className="text-primary">*</span>
                             </div>
-                            <div className="flex flex-col  items-center w-full md:pr-24 flex-grow-0">
+                            <div className="flex flex-col  w-full md:pr-24 flex-grow-0">
                                 <Inputs name="name" placeholder="Masukan Nama User" ref={register({ required: true })} autoComplete="off" />
                                 <p className="text-primary">{stationCreate.error?.name}</p>
+                                {errors.name && (<p className="text-primary">Name Tidak Boleh Kosong</p>)}
                             </div>
                         </div>
                         <div className="flex items-center mx-2 justify-between">
@@ -66,9 +67,11 @@ const Create = ({ auth }) => {
                                 <span className="font-bold">Password</span>
                                 <span className="text-primary">*</span>
                             </div>
-                            <div className="flex flex-col items-center w-full md:pr-24 flex-grow-0">
-                                <Inputs name="password" type="password" placeholder="Masukan password" autoComplete="off" ref={register({ required: true })} />
+                            <div className="flex flex-col w-full md:pr-24 flex-grow-0">
+                                <Inputs name="password" type="password" placeholder="Masukan password" autoComplete="off" ref={register({ required: true, minLength: 6 })} />
                                 <p className="text-primary">{stationCreate.error?.password}</p>
+                                {errors.password && (<p className="text-primary">Password Tidak Boleh Kosong</p>)}
+                                {errors.password?.type === 'minLength' && (<p className="text-primary">Harus Lebih 6 Digit</p>)}
                             </div>
                         </div>
                         <div className="flex  items-center mx-2 justify-between">
@@ -76,9 +79,10 @@ const Create = ({ auth }) => {
                                 <span className="font-bold">Nama SPBU</span>
                                 <span className="text-primary">*</span>
                             </div>
-                            <div className="flex flex-col items-center w-full md:pr-24">
+                            <div className="flex flex-col  w-full md:pr-24">
                                 <Inputs name="name_station" placeholder="Masukan Nama SPBU" ref={register({ required: true })} autoComplete="off" />
                                 <p className="text-primary">{stationCreate.error?.name_station}</p>
+                                {errors.name_station && (<p className="text-primary">Nama Spbu Tidak Boleh Kosong</p>)}
                             </div>
                         </div>
                         <div className="flex items-center mx-2 justify-between">
@@ -87,8 +91,10 @@ const Create = ({ auth }) => {
                                 <span className="text-primary">*</span>
                             </div>
                             <div className="flex flex-col w-full md:pr-24">
-                                <Inputs name="no_station" placeholder="Masukan No SPBU" ref={register({ required: true })} autoComplete="off" />
+                                <Inputs name="no_station" placeholder="Masukan No SPBU" ref={register({ required: true, minLength: 8 })} autoComplete="off" />
                                 <p className="text-primary">{stationCreate.error?.no_station}</p>
+                                {errors.no_station && (<p className="text-primary">Nomor SPBU Tidak Boleh Kosong</p>)}
+                                {errors.no_station?.type === 'minLength' && (<p className="text-primary">Nomor spbu harus lebih dari 8 Digit</p>)}
                             </div>
                         </div>
                         <div className="flex items-center mx-2 justify-between">
