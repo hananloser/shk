@@ -17,8 +17,7 @@ export const withAuth = (WrappedComponent: any) => {
             const token = ServerCookies(ctx)['SHK']
             const auth = new AuthToken(token)
             const initialProps = { auth }
-
-            if (auth.isExpired || token === undefined || !auth.isValid || auth.decodeToken.roles === "manager") {
+            if (auth.isExpired || token === undefined || !auth.isValid ) {
                 ctx.res?.writeHead(302, {
                     Location: '/'
                 })

@@ -1,15 +1,20 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 import MemoCash from '../../assets/icons/Cash'
 import { Button } from '../../compoents/button'
 import Header from '../../compoents/Header/Index'
 import Sidebar from '../../compoents/Sidebar'
 import { withAuth } from '../../hoc/withAuth'
+import { AuthToken } from '../../services/auth_token'
 
-const Dashboard = () => {
+const Dashboard = ({ auth }) => {
+    const user: AuthToken = auth
+    const router = useRouter();
+
     return (
         <div>
-            <Header variant='manager' variantUser='manager' variantTitle="manager" />
-            <Sidebar active="active" />
+            <Header variant='manager' variantUser='manager' variantTitle="manager" username={user.decodeToken.name} />
+            <Sidebar active={router.pathname === '/dashboard' ? 'active' : 'deactive'}  />
             <div className="flex flex-col md:ml-80">
                 <div className="flex flex-col">
                     <div className="mt-32 flex justify-center font-roboto font-bold uppercase text-3xl">
