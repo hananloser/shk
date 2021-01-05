@@ -1,12 +1,16 @@
 import jwtDecode from 'jwt-decode'
 import { Cookies } from 'react-cookie'
 import router from 'next/router'
+import { Station } from '../model/Station';
+
+
 
 export type DecodedToken = {
     name: string
     readonly username: string;
     readonly exp: number;
     readonly roles: string
+    readonly station: Station
 }
 
 const TOKEN_KEY = 'SHK';
@@ -14,7 +18,7 @@ const TOKEN_KEY = 'SHK';
 export class AuthToken {
     readonly decodeToken: DecodedToken
     constructor(readonly token?: string) {
-        this.decodeToken = { username: '', exp: 0, roles: '', name: '' }
+        this.decodeToken = { username: '', exp: 0, roles: '', name: '', station: { id: '', name_station: '' } }
         try {
             if (token) this.decodeToken = jwtDecode(token);
         } catch (e) {
