@@ -1,8 +1,8 @@
-import { ErrorMessage, Product, ProductActionTypes } from "../../actions/products/ProductActionTypes";
+import { ErrorMessage, Product, ProductActionTypes, Station } from "../../actions/products/ProductActionTypes";
 
 interface InitialState {
     loading: boolean,
-    products?: Product[],
+    products?: Station,
     product?: Product,
     error?: ErrorMessage
 }

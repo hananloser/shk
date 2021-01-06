@@ -28,6 +28,7 @@ const CardSpbu = ({ name, image, station, handleId }: Props) => {
                 width="240"
                 height="128"
                 className="w-80 h-60 bg-cover rounded-lg"
+                onClick={() => router.push({ pathname: '/dashboard', query: { station: station.id } })}
             />
             <div className="flex w-full bg-primary rounded-bl-lg rounded-br-lg absolute bottom-0 p-3 font-bold text-alt">
                 {name}

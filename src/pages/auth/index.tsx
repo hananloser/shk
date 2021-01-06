@@ -9,11 +9,13 @@ import MemoShk from '../../assets/icons/Shk';
 import redirect from '../../lib/redirect';
 import jwtDecode from 'jwt-decode';
 import { Cookies } from 'react-cookie'
+import { Station } from '../../model/Station';
 
 const cookies = new Cookies()
 
 type Token = {
-	roles: string
+	roles: string,
+	station: Station
 }
 
 
@@ -43,7 +45,7 @@ const Auth = () => {
 			if (token.roles === 'admin') {
 				redirect(302, '/admin')
 			} else {
-				redirect(302, '/dashboard')
+				redirect(302, '/dashboard?station=' + token.station.id)
 			}
 		} catch (error) {
 			alert('Username Atau Password Salah')

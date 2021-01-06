@@ -63,6 +63,11 @@ export interface Product {
     total: string
 }
 
+export interface Station {
+    name_station : string,
+    products : Product[]
+}
+
 /**
  * Action Types For GET PRODUCTS
  */
@@ -72,7 +77,7 @@ export interface ProductLoading {
 
 export interface ProductSuccess {
     type: typeof PRODUCT_SUCCESS,
-    payload: Product[]
+    payload: Station
 }
 
 export interface ProductFail {

@@ -70,7 +70,7 @@ const Admin = ({ auth }) => {
             <div className="flex justify-center mb-16 mt-16">
                 <div className="grid grid-flow-row grid-cols-1 grid-rows-2 gap-7 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-7  md:gap-7 ">
                     {!stationState.loading && stationState.stations?.data.map(item => (
-                        <CardSpbu station={item} key={item.id} name={item.name_station} image={imageUrl} handleId={passingId} />
+                        <CardSpbu station={item} key={item.id} name={item.name_station} image={imageUrl} handleId={passingId}  />
                     ))}
                 </div>
             </div>

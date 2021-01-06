@@ -10,11 +10,13 @@ export enum Active {
 }
 
 interface Props {
-    active?: keyof typeof Active
+    active?: keyof typeof Active,
 }
 
 const Sidebar = ({ active = 'deactive' }: Props) => {
+
     const routePath = useRouter();
+
     const menu = [
         { name: "Produk", path: '/product' },
         { name: "Laporan Harian", path: '/report' },
@@ -41,8 +43,11 @@ const Sidebar = ({ active = 'deactive' }: Props) => {
             <div className="item-menu">
                 {menu.map((item, index) => (
                     <ul key={index} className="text-white font-bold mx-auto my-5 ml-5 tracking-wide font-roboto">
-                        <Link href={item.path}>
-                            <a  className={routePath.pathname === item.path ? activeClass : ''}>{item.name}</a>
+                        <Link href={{
+                            pathname: item.path,
+                            query: { station: routePath.query.station as string }
+                        }} passHref >
+                            <a className={routePath.pathname === item.path ? activeClass : ''}>{item.name}</a>
                         </Link>
                     </ul>
                 ))}
