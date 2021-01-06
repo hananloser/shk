@@ -8,7 +8,7 @@ const Home = () => {
       <Head>
         <title>SHK GROUP APPLICATION</title>
       </Head>
-      <Auth />
+      <Auth  />
     </>
   )
 }

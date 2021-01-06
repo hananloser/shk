@@ -3,6 +3,7 @@ import React from 'react'
 import MemoAvatar from '../../assets/icons/Avatar'
 import MemoShk from '../../assets/icons/Shk'
 import { usePopup } from '../../providers/PopupProvider'
+import { AuthToken } from '../../services/auth_token'
 
 export enum Variant {
     manager = 'bg-alt',
@@ -48,7 +49,7 @@ const Header = ({ variant = 'manager', title, variantUser, variantTitle, usernam
                     <div className="bg-alt absolute top-12 right-12 w-36 h-24 text-right p-4 shadow-lg">
                         <span className="mb-2 font-semibold cursor-pointer">Lihat Profil</span>
                         <br />
-                        <span className="mb-2 font-semibold cursor-pointer">Keluar</span>
+                        <span className="mb-2 font-semibold cursor-pointer" onClick={() => AuthToken.logout()}  >Keluar</span>
                     </div>
                 )}
             </div>

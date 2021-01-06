@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from './component/Input/Input';
 import Skleton from 'react-loading-skeleton';
 import { useForm } from 'react-hook-form'
@@ -10,6 +10,8 @@ import redirect from '../../lib/redirect';
 import jwtDecode from 'jwt-decode';
 import { Cookies } from 'react-cookie'
 import { Station } from '../../model/Station';
+import { withAuth } from '../../hoc/withAuth';
+import { useRouter } from 'next/router';
 
 const cookies = new Cookies()
 
@@ -18,16 +20,24 @@ type Token = {
 	station: Station
 }
 
-
 type Login = {
 	username: string,
 	password: string
 }
 
-const Auth = () => {
+const Auth = ({ auth }) => {
 	const [loading, setLoading] = useState<boolean>(false);
-
 	const { register, handleSubmit } = useForm<Login>()
+	const router = useRouter()
+	const isLogin: AuthToken = auth
+
+	useEffect(() => {
+		if (isLogin.isValid && isLogin.decodeToken.roles === 'manager') {
+			router.push('/dashboard?station=' + isLogin.decodeToken.station.id)
+		} else if (isLogin.decodeToken.roles === 'admin') {
+			router.push('/admin');
+		}
+	}, [])
 
 	const handleForm = ({ username, password }: Login) => {
 		login({ username, password });
@@ -94,4 +104,4 @@ const Auth = () => {
 	)
 }
 
-export default Auth
+export default withAuth(Auth)

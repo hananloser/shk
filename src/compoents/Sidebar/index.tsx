@@ -15,6 +15,7 @@ interface Props {
 
 const Sidebar = ({ active = 'deactive' }: Props) => {
 
+
     const routePath = useRouter();
 
     const menu = [
@@ -45,7 +46,7 @@ const Sidebar = ({ active = 'deactive' }: Props) => {
                     <ul key={index} className="text-white font-bold mx-auto my-5 ml-5 tracking-wide font-roboto">
                         <Link href={{
                             pathname: item.path,
-                            query: { station: routePath.query.station as string }
+                            query: { station: routePath.query.station as string  }
                         }} passHref >
                             <a className={routePath.pathname === item.path ? activeClass : ''}>{item.name}</a>
                         </Link>

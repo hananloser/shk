@@ -1,30 +1,40 @@
-import React, { useEffect } from 'react'
-import { Cookies } from 'react-cookie'
-import redirect from '../lib/redirect';
+import React, { Component } from 'react'
+import { NextPageContext } from 'next';
+import { AuthToken } from '../services/auth_token';
+import ServerCookies from 'next-cookies'
+import { Cookies } from 'react-cookie';
 
+export type AuthProps = {
+    auth: AuthToken
+}
+const cookies = new Cookies()
+export const withoutAuth = (WrappedComponent: any) => {
+    return class extends Component<AuthProps> {
+        static async getInitialProps(ctx: NextPageContext) {
 
-const cookie = new Cookies();
+            const token = ServerCookies(ctx)['SHK']
 
-export const withoutAuth = <T extends object>(Component: React.FC<T>) => {
-    const AuthComponent: React.FC<T> = (props) => {
-        const me = async () => {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/me`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + cookie.get('token')
-                }
-            });
-            if (response.status == 200 || cookie.get('token') !== undefined) {
-                redirect('error', '/dashboard')
+            const auth = new AuthToken(token)
+
+            const initialProps = { auth }
+
+            
+            if (WrappedComponent.getInitialProps) {
+                return WrappedComponent.getInitialProps(ctx, initialProps);
             }
+
+            return initialProps
         }
-        useEffect(() => {
-            me();
-        }, [])
-  
-        return (
-            <Component {...props} />
-        )
+
+        get auth() {
+            // the server pass to the client serializes the token
+            // so we have to reinitialize the authToken class
+            //
+            // @see https://github.com/zeit/next.js/issues/3536
+            return new AuthToken(cookies.get('SHK') || this.props.auth?.token);
+        }
+        render() {
+            return <WrappedComponent  {...this.props} auth={this.auth} />
+        }
     }
-    return AuthComponent
 }
