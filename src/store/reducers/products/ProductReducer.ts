@@ -2,7 +2,8 @@ import { ErrorMessage, Product, ProductActionTypes } from "../../actions/product
 
 interface InitialState {
     loading: boolean,
-    product?: Product | Product[],
+    products?: Product[],
+    product?: Product,
     error?: ErrorMessage
 }
 
@@ -11,7 +12,7 @@ const intialState: InitialState = {
 }
 
 export const productReducer = (state: InitialState = intialState, action: ProductActionTypes): InitialState => {
-    
+
     switch (action.type) {
         case 'PRODUCT_LOADING':
             return {
@@ -22,14 +23,14 @@ export const productReducer = (state: InitialState = intialState, action: Produc
             return {
                 ...state,
                 loading: false,
-                product: action.payload
+                products: action.payload
             }
 
         case 'PRODUCT_FAIL':
             return {
                 ...state,
                 loading: false,
-                error : action.message
+                error: action.message
             }
 
         default:

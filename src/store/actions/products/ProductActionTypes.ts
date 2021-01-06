@@ -51,9 +51,16 @@ export interface Product {
     price_buy: number;
     price_sell: number;
     price_8kl: number;
+    pph: number,
+    margin_pokok: number,
+    margin_pph: number,
     formated_price_buy?: string;
     formatted_price_sell?: string;
     formatted_price_8kl?: string;
+    formatted_pph?: string;
+    formatted_margin_pokok?: string;
+    formatted_margin_pph?: string;
+    total: string
 }
 
 /**
