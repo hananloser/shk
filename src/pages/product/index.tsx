@@ -15,6 +15,7 @@ import { withAuth } from '../../hoc/withAuth'
 import { AuthToken } from '../../services/auth_token'
 import { GetProducts } from '../../store/actions/products/ProductAction'
 import { RootStore } from '../../store/store'
+import { motion } from 'framer-motion'
 
 
 const ProductPage = ({ auth }) => {
@@ -38,7 +39,7 @@ const ProductPage = ({ auth }) => {
                     <div className="flex justify-center">
                         <h1 className="font-bold text-3xl">PRODUCT {products?.name_station.toUpperCase()}  </h1>
                     </div>
-                    <div className="flex bg-gray-200 rounded-lg p-3 shadow-xl mx-12 mt-5">
+                    <div className="flex bg-gray-200 rounded-lg p-12 shadow-xl mx-12 mt-5 relative">
                         <div className="w-full">
                             <div className="shadow  overflow-auto overflow-x-scroll  rounded border-b border-gray-100" >
                                 <table className="min-w-full bg-alt mb-3">
@@ -80,6 +81,12 @@ const ProductPage = ({ auth }) => {
                                 </table>
                             </div>
                         </div>
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-20 h-20 shadow-lg antialiased cursor-pointer  rounded-full flex justify-center items-center text-4xl text-white  bg-primary absolute bottom-4 right-12 focus:outline-none">
+                            +
+                       </motion.button>
                     </div>
                 </MainContent>
             </div>

@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { Arrow, useLayer } from 'react-laag'
 import MemoAvatar from '../../assets/icons/Avatar'
 import MemoShk from '../../assets/icons/Shk'
-import { usePopup } from '../../providers/PopupProvider'
 import { AuthToken } from '../../services/auth_token'
 
 export enum Variant {
