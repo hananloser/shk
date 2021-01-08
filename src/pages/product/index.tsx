@@ -9,7 +9,6 @@ import MemoTrash from '../../assets/icons/Trash'
 import MainContent from '../../compoents/container/MainContent'
 import Header from '../../compoents/Header/Index'
 import Sidebar from '../../compoents/Sidebar'
-import Modal from '../../compoents/Modal'
 
 
 import { useRouter } from 'next/router'
@@ -18,8 +17,8 @@ import { withAuth } from '../../hoc/withAuth'
 import { AuthToken } from '../../services/auth_token'
 import { GetProducts } from '../../store/actions/products/ProductAction'
 import { RootStore } from '../../store/store'
-import { useModal } from '../../providers/ModalProvider'
 import { motion } from 'framer-motion'
+import usePortal from 'react-cool-portal'
 
 
 const ProductPage = ({ auth }) => {
@@ -29,7 +28,10 @@ const ProductPage = ({ auth }) => {
     const { products } = useSelector((state: RootStore) => state.product)
 
     const station_id = router.query.station as string;
-    const { modal, setModal } = useModal()
+
+    const { Portal, toggle } = usePortal({ containerId: 'modal-edit', defaultShow: false, clickOutsideToHide: true })
+    const { Portal : PortalHapus, toggle : toggleHapus } = usePortal({ containerId: 'modal-hapus', defaultShow: false, clickOutsideToHide: true })
+
     useEffect(() => {
         dispatch(GetProducts(station_id))
     }, [])
@@ -43,6 +45,7 @@ const ProductPage = ({ auth }) => {
                     <div className="flex justify-center">
                         <h1 className="font-bold text-3xl">PRODUCT {products?.name_station.toUpperCase()}  </h1>
                     </div>
+
                     <div className="flex bg-gray-200 rounded-lg p-12 shadow-xl mx-12 mt-5">
                         <div className="w-full ">
                             <div className="shadow overflow-x-scroll rounded-xl   border-b border-gray-100" >
@@ -75,8 +78,8 @@ const ProductPage = ({ auth }) => {
                                                 <td className="border-b-2 border-r-2 text-left px-4">{item.total}</td>
                                                 <td className="border-b-2">
                                                     <div className="flex item-center justify-center space-x-2">
-                                                        <MemoEdit onClick={() => setModal(!modal)} />
-                                                        <MemoTrash />
+                                                        <MemoEdit onClick={toggle} />
+                                                        <MemoTrash onClick={toggleHapus} />
                                                     </div>
                                                 </td>
                                             </tr>
@@ -86,14 +89,28 @@ const ProductPage = ({ auth }) => {
                             </div>
                         </div>
                     </div>
+
                     {/* Modal in Here */}
-                    <Modal>
-                        <div className="p-2">
-                            <div className="flex flex-col item-center justify-center space-y-4 h-44">
-                                <span className="text-4xl font-bold">Apa Anda Yakin ?</span>
+                    <Portal>
+                        <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-50" onClick={toggle}></div>
+                        <div className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
+                            <div className="p-2">
+                                <div className="flex flex-col item-center justify-center space-y-4 h-44">
+                                    <span className="text-4xl font-bold">Edit Modal?</span>
+                                </div>
                             </div>
                         </div>
-                    </Modal>
+                    </Portal>
+                    <PortalHapus>
+                        <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-50" onClick={toggleHapus}></div>
+                        <div className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
+                            <div className="p-2">
+                                <div className="flex flex-col item-center justify-center space-y-4 h-44">
+                                    <span className="text-4xl font-bold">Apa Anda Yakin Hapus ?</span>
+                                </div>
+                            </div>
+                        </div>
+                    </PortalHapus>
                 </MainContent>
                 <motion.button
                     whileHover={{ scale: 1.1 }}
