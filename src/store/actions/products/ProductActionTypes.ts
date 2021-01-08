@@ -64,8 +64,8 @@ export interface Product {
 }
 
 export interface Station {
-    name_station : string,
-    products : Product[]
+    name_station: string,
+    products: Product[]
 }
 
 /**
@@ -94,7 +94,7 @@ export interface ProductStoreLoading {
 
 export interface ProductStoreSuccess {
     type: typeof PRODUCT_STORE_SUCCESS,
-    message: string
+    payload: any
 }
 
 export interface ProductStoreFail {
@@ -141,7 +141,6 @@ export interface ProductDeleteFail {
  */
 export interface ProductDetailLoading {
     type: typeof PRODUCT_DETAIL_LOADING,
-    message: string
 }
 
 export interface ProductDetailSuccess {
