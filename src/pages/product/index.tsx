@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 
-import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from 'react-redux'
 import MemoDexlite from '../../assets/icons/Dexlite'
 import MemoEdit from '../../assets/icons/Edit'
 import MemoPertamax from '../../assets/icons/Pertamax'
@@ -11,10 +9,16 @@ import MemoTrash from '../../assets/icons/Trash'
 import MainContent from '../../compoents/container/MainContent'
 import Header from '../../compoents/Header/Index'
 import Sidebar from '../../compoents/Sidebar'
+import Modal from '../../compoents/Modal'
+
+
+import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import { withAuth } from '../../hoc/withAuth'
 import { AuthToken } from '../../services/auth_token'
 import { GetProducts } from '../../store/actions/products/ProductAction'
 import { RootStore } from '../../store/store'
+import { useModal } from '../../providers/ModalProvider'
 import { motion } from 'framer-motion'
 
 
@@ -25,7 +29,7 @@ const ProductPage = ({ auth }) => {
     const { products } = useSelector((state: RootStore) => state.product)
 
     const station_id = router.query.station as string;
-
+    const { modal, setModal } = useModal()
     useEffect(() => {
         dispatch(GetProducts(station_id))
     }, [])
@@ -39,9 +43,9 @@ const ProductPage = ({ auth }) => {
                     <div className="flex justify-center">
                         <h1 className="font-bold text-3xl">PRODUCT {products?.name_station.toUpperCase()}  </h1>
                     </div>
-                    <div className="flex bg-gray-200 rounded-lg p-12 shadow-xl mx-12 mt-5 relative">
-                        <div className="w-full">
-                            <div className="shadow  overflow-auto overflow-x-scroll  rounded border-b border-gray-100" >
+                    <div className="flex bg-gray-200 rounded-lg p-12 shadow-xl mx-12 mt-5">
+                        <div className="w-full ">
+                            <div className="shadow overflow-x-scroll rounded-xl   border-b border-gray-100" >
                                 <table className="min-w-full bg-alt mb-3">
                                     <thead>
                                         <tr>
@@ -71,7 +75,7 @@ const ProductPage = ({ auth }) => {
                                                 <td className="border-b-2 border-r-2 text-left px-4">{item.total}</td>
                                                 <td className="border-b-2">
                                                     <div className="flex item-center justify-center space-x-2">
-                                                        <MemoEdit />
+                                                        <MemoEdit onClick={() => setModal(!modal)} />
                                                         <MemoTrash />
                                                     </div>
                                                 </td>
@@ -81,14 +85,22 @@ const ProductPage = ({ auth }) => {
                                 </table>
                             </div>
                         </div>
-                        <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-20 h-20 shadow-lg antialiased cursor-pointer  rounded-full flex justify-center items-center text-4xl text-white  bg-primary absolute bottom-4 right-12 focus:outline-none">
-                            +
-                       </motion.button>
                     </div>
+                    {/* Modal in Here */}
+                    <Modal>
+                        <div className="p-2">
+                            <div className="flex flex-col item-center justify-center space-y-4 h-44">
+                                <span className="text-4xl font-bold">Apa Anda Yakin ?</span>
+                            </div>
+                        </div>
+                    </Modal>
                 </MainContent>
+                <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-12 h-12 md:w-20 md:h-20 shadow-lg antialiased cursor-pointer  rounded-full flex justify-center items-center text-4xl text-white  bg-primary absolute bottom-12 z-50 right-12 focus:outline-none">
+                    +
+                 </motion.button>
             </div>
         </>
     )
