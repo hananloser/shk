@@ -30,7 +30,8 @@ const ProductPage = ({ auth }) => {
     const station_id = router.query.station as string;
 
     const { Portal, toggle } = usePortal({ containerId: 'modal-edit', defaultShow: false, clickOutsideToHide: true })
-    const { Portal : PortalHapus, toggle : toggleHapus } = usePortal({ containerId: 'modal-hapus', defaultShow: false, clickOutsideToHide: true })
+    const { Portal: PortalHapus, toggle: toggleHapus } = usePortal({ containerId: 'modal-hapus', defaultShow: false, clickOutsideToHide: true })
+    const { Portal: PortalTambah, toggle: toggleTambah } = usePortal({ containerId: 'modal-tambah', defaultShow: false, clickOutsideToHide: true });
 
     useEffect(() => {
         dispatch(GetProducts(station_id))
@@ -89,31 +90,21 @@ const ProductPage = ({ auth }) => {
                             </div>
                         </div>
                     </div>
-
-                    {/* Modal in Here */}
+                    {/* Modal Edit */}
                     <Portal>
-                        <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-50" onClick={toggle}></div>
-                        <div className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
-                            <div className="p-2">
-                                <div className="flex flex-col item-center justify-center space-y-4 h-44">
-                                    <span className="text-4xl font-bold">Edit Modal?</span>
-                                </div>
-                            </div>
-                        </div>
+                        <ModalEdit toggle={toggle} />
                     </Portal>
+                    {/* Hapus Modal */}
                     <PortalHapus>
-                        <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-50" onClick={toggleHapus}></div>
-                        <div className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
-                            <div className="p-2">
-                                <div className="flex flex-col item-center justify-center space-y-4 h-44">
-                                    <span className="text-4xl font-bold">Apa Anda Yakin Hapus ?</span>
-                                </div>
-                            </div>
-                        </div>
+                        <ModalHapus toggleHapus={toggleHapus} />
                     </PortalHapus>
+                    <PortalTambah>
+                        <ModalTambah toggleTambah={toggleTambah} />
+                    </PortalTambah>
                 </MainContent>
+                {/* Modal Tambah Data */}
                 <motion.button
-                    whileHover={{ scale: 1.1 }}
+                    onClick={toggleTambah}
                     whileTap={{ scale: 0.9 }}
                     className="w-12 h-12 md:w-20 md:h-20 shadow-lg antialiased cursor-pointer  rounded-full flex justify-center items-center text-4xl text-white  bg-primary absolute bottom-12 z-50 right-12 focus:outline-none">
                     +
@@ -122,9 +113,6 @@ const ProductPage = ({ auth }) => {
         </>
     )
 }
-
-export default withAuth(ProductPage)
-
 
 export const ProductIcon = ({ name }) => {
     switch (name) {
@@ -144,3 +132,56 @@ export const ProductIcon = ({ name }) => {
             return <MemoPertamax />
     }
 }
+
+export const ModalTambah = ({ toggleTambah }) => {
+    return (
+        <>
+            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-50" onClick={toggleTambah}></div>
+            <motion.div
+                whileTap={{ scale: 0.9 }}
+                className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
+                <div className="p-2">
+                    <div className="flex flex-col justify-center space-y-4 h-44">
+                        <span className="text-xl font-bold">--------------Tambah Data----------</span>
+                    </div>
+                </div>
+            </motion.div>
+        </>
+    )
+}
+
+export const ModalEdit = ({ toggle }) => {
+    return (
+        <>
+            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-50" onClick={toggle}></div>
+            <div className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
+                <div className="p-2">
+                    <div className="flex flex-col item-center justify-center space-y-4 h-44">
+                        <span className="text-4xl font-bold">Edit Modal?</span>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export const ModalHapus = ({ toggleHapus }) => {
+    return (
+        <>
+            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-50" onClick={toggleHapus}></div>
+            <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
+                <div className="p-2">
+                    <div className="flex flex-col item-center justify-center space-y-4 h-44">
+                        <span className="text-4xl font-bold">Apa Anda Yakin Hapus ?</span>
+                    </div>
+                </div>
+            </motion.div>
+        </>
+    )
+}
+
+export default withAuth(ProductPage)
+
