@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
     name: string,
-    placeholder: string,
+    placeholder?: string,
     value?: string,
 };
 

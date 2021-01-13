@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import MemoDexlite from '../../assets/icons/Dexlite'
 import MemoEdit from '../../assets/icons/Edit'
@@ -9,17 +9,19 @@ import MemoTrash from '../../assets/icons/Trash'
 import MainContent from '../../compoents/container/MainContent'
 import Header from '../../compoents/Header/Index'
 import Sidebar from '../../compoents/Sidebar'
+import FormTambah from './components/FormTambah'
+import usePortal from 'react-cool-portal'
 
 
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { withAuth } from '../../hoc/withAuth'
 import { AuthToken } from '../../services/auth_token'
-import { GetProducts } from '../../store/actions/products/ProductAction'
+import { DeleteProduct, GetProducts } from '../../store/actions/products/ProductAction'
 import { RootStore } from '../../store/store'
 import { motion } from 'framer-motion'
-import usePortal from 'react-cool-portal'
-import FormTambah from './components/FormTambah'
+import { Button } from '../../compoents/button'
+import FormEdit from './components/FormEdit'
 
 
 const ProductPage = ({ auth }) => {
@@ -27,12 +29,28 @@ const ProductPage = ({ auth }) => {
     const router = useRouter()
     const dispatch = useDispatch()
     const { products } = useSelector((state: RootStore) => state.product)
+    const { loading } = useSelector((state: RootStore) => state.product)
 
     const station_id = router.query.station as string;
 
     const { Portal, toggle } = usePortal({ containerId: 'modal-edit', defaultShow: false, clickOutsideToHide: true })
     const { Portal: PortalHapus, toggle: toggleHapus } = usePortal({ containerId: 'modal-hapus', defaultShow: false, clickOutsideToHide: true })
     const { Portal: PortalTambah, toggle: toggleTambah } = usePortal({ containerId: 'modal-tambah', defaultShow: false, clickOutsideToHide: true });
+
+    const [productId, setProductId] = useState()
+    const [product, setProduct] = useState();
+
+
+    const handleToggle = (productId, name, item?) => {
+        if (name === 'hapus') {
+            toggleHapus();
+            setProductId(productId)
+        } else if (name === 'edit') {
+            toggle();
+            setProductId(productId)
+            setProduct(item)
+        }
+    }
 
     useEffect(() => {
         dispatch(GetProducts(station_id))
@@ -48,53 +66,56 @@ const ProductPage = ({ auth }) => {
                 </div>
                 <div className="flex bg-gray-200 rounded-lg xl:p-12 shadow-xl mx-12 mt-5">
                     <div className="w-full ">
-                        <div className="shadow overflow-x-scroll rounded-xl border-b border-gray-100" >
-                            <table className="min-w-full bg-alt mb-3">
-                                <thead>
-                                    <tr>
-                                        <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Nama Produk</th>
-                                        <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Harga Beli/8KL</th>
-                                        <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">PPH</th>
-                                        <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Margin Pokok</th>
-                                        <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Margin PPH</th>
-                                        <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Harga Beli/L</th>
-                                        <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Harga Jual/L</th>
-                                        <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Total</th>
-                                        <th className="border-b-2 border-r-2 text-center py-3 px-4 uppercase font-semibold text-sm">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-gray-700 border-b-2 border-l-2 border-r-2">
-                                    {products?.products?.map(item => (
-                                        <tr key={item.id} className="hover:bg-gray-400 cursor-pointer">
-                                            <td className="text-left px-4 border-b-2 border-r-2 ">
-                                                <ProductIcon name={item.name} />
-                                            </td>
-                                            <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_price_8kl}</td>
-                                            <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_pph}</td>
-                                            <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_margin_pokok}</td>
-                                            <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_margin_pph}</td>
-                                            <td className="border-b-2 border-r-2 text-left px-4">{item.formated_price_buy}</td>
-                                            <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_price_sell}</td>
-                                            <td className="border-b-2 border-r-2 text-left px-4">{item.total}</td>
-                                            <td className="border-b-2">
-                                                <div className="flex item-center justify-center space-x-2">
-                                                    <MemoEdit onClick={toggle} />
-                                                    <MemoTrash onClick={toggleHapus} />
-                                                </div>
-                                            </td>
+                        {loading ? (<p>Loading</p>) :
+                            <div className="shadow overflow-x-scroll rounded-xl border-b border-gray-100" >
+                                <table className="min-w-full bg-alt mb-3">
+                                    <thead>
+                                        <tr>
+                                            <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Nama Produk</th>
+                                            <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Harga Beli/8KL</th>
+                                            <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">PPH</th>
+                                            <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Margin Pokok</th>
+                                            <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Margin PPH</th>
+                                            <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Harga Beli/L</th>
+                                            <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Harga Jual/L</th>
+                                            <th className="border-b-2 border-r-2 text-left py-3 px-4 uppercase font-semibold text-sm">Total</th>
+                                            <th className="border-b-2 border-r-2 text-center py-3 px-4 uppercase font-semibold text-sm">Action</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody className="text-gray-700 border-b-2 border-l-2 border-r-2">
+                                        {products?.products?.map(item => (
+                                            <tr key={item.id} className="hover:bg-gray-400 cursor-pointer">
+                                                <td className="text-left px-4 border-b-2 border-r-2 ">
+                                                    <ProductIcon name={item.name} />
+                                                </td>
+                                                <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_price_8kl}</td>
+                                                <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_pph}</td>
+                                                <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_margin_pokok}</td>
+                                                <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_margin_pph}</td>
+                                                <td className="border-b-2 border-r-2 text-left px-4">{item.formated_price_buy}</td>
+                                                <td className="border-b-2 border-r-2 text-left px-4">{item.formatted_price_sell}</td>
+                                                <td className="border-b-2 border-r-2 text-left px-4">{item.total}</td>
+                                                <td className="border-b-2">
+                                                    <div className="flex item-center justify-center space-x-2">
+                                                        <MemoEdit onClick={() => handleToggle(item.id, 'edit', item)} />
+                                                        <MemoTrash onClick={() => handleToggle(item.id, 'hapus', item)} />
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
                     </div>
                 </div>
                 <Portal>
-                    <ModalEdit toggle={toggle} />
+                    <ModalEdit toggle={toggle} product={product} />
                 </Portal>
                 {/* Hapus Modal */}
                 <PortalHapus>
-                    <ModalHapus toggleHapus={toggleHapus} />
+                    <ModalHapus toggleHapus={toggleHapus} productId={productId} />
                 </PortalHapus>
                 <PortalTambah>
                     <ModalTambah toggleTambah={toggleTambah} />
@@ -142,32 +163,48 @@ export const ModalTambah = ({ toggleTambah }) => {
     )
 }
 
-export const ModalEdit = ({ toggle }) => {
+export const ModalEdit = ({ toggle, product }) => {
     return (
         <>
             <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-30" onClick={toggle}></div>
-            <div className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
-                <div className="p-2">
-                    <div className="flex flex-col item-center justify-center space-y-4 h-44">
-                        <span className="text-4xl font-bold">Edit Modal?</span>
-                    </div>
-                </div>
-            </div>
+            <motion.div
+                animate={{ x: 0, }}
+                initial={{ x: -300 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white rounded-xl h-auto absolute inset-0 my-32 xl:ml-80 xl:mr-24 z-50 ">
+                <FormEdit product={product} toggle={toggle} />
+            </motion.div>
         </>
     )
 }
 
-export const ModalHapus = ({ toggleHapus }) => {
+export const ModalHapus = ({ toggleHapus, productId }) => {
+    const dispatch = useDispatch()
+    const router = useRouter()
+    const station_id = router.query.station as string;
+
+    const handleHapus = () => {
+        dispatch(DeleteProduct(station_id, productId));
+        dispatch(GetProducts(station_id));
+        toggleHapus()
+    }
+
     return (
         <>
             <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-30" onClick={toggleHapus}></div>
             <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                animate={{ x: 0, }}
+                initial={{ x: -300 }}
                 className="bg-white right-0 w-full md:right-96 md:w-1/2 rounded-md h-auto mb-5 fixed flex justify-center top-56 z-50 ">
                 <div className="p-2">
                     <div className="flex flex-col item-center justify-center space-y-4 h-44">
                         <span className="text-4xl font-bold">Apa Anda Yakin Hapus ?</span>
+                        <Button variant='primary' onClick={handleHapus} >
+                            Ya
+                         </Button>
+                        <Button variant='outline' onClick={toggleHapus} >
+                            Batal
+                         </Button>
                     </div>
                 </div>
             </motion.div>

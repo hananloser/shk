@@ -68,6 +68,11 @@ export interface Station {
     products: Product[]
 }
 
+export interface ProductItem {
+    name_station: string,
+    product: Product
+}
+
 /**
  * Action Types For GET PRODUCTS
  */
@@ -145,7 +150,7 @@ export interface ProductDetailLoading {
 
 export interface ProductDetailSuccess {
     type: typeof PRODUCT_DETAIL_SUCCESS,
-    payload: Product
+    payload: ProductItem
 }
 
 export interface ProductDetailFail {
@@ -167,3 +172,6 @@ export type ProductActionTypes =
     | ProductDetailLoading
     | ProductDetailSuccess
     | ProductDetailFail
+    | ProductDeleteoading
+    | ProductDeleteSuccess
+    | ProductDeleteFail
