@@ -7,7 +7,7 @@ interface Props {
     label: string
     name: string,
     register: any,
-    value: string | number
+    value?: string | number
 }
 
 /**

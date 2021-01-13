@@ -13,9 +13,9 @@ const FormTambah = ({ toggle }) => {
     const router = useRouter();
     const station_id = router.query.station as string;
 
-    const handleForm = (data) => {
-        dispatch(StoreProducts(station_id, data));
-        dispatch(GetProducts(station_id))
+    const handleForm = async (data) => {
+        await dispatch(StoreProducts(station_id, data));
+        await dispatch(GetProducts(station_id))
         toggle();
     }
     return (

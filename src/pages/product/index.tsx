@@ -22,6 +22,7 @@ import { RootStore } from '../../store/store'
 import { motion } from 'framer-motion'
 import { Button } from '../../compoents/button'
 import FormEdit from './components/FormEdit'
+import MemoPertaminaTurbo from '../../assets/icons/PertaminaTurbo'
 
 
 const ProductPage = ({ auth }) => {
@@ -140,6 +141,9 @@ export const ProductIcon = ({ name }) => {
         case 'Premium':
             return <MemoPremium />
 
+        case 'Pertamina Turbo':
+            return <MemoPertaminaTurbo />
+
         case 'Dexlite':
             return <MemoDexlite />
 
@@ -183,9 +187,9 @@ export const ModalHapus = ({ toggleHapus, productId }) => {
     const router = useRouter()
     const station_id = router.query.station as string;
 
-    const handleHapus = () => {
-        dispatch(DeleteProduct(station_id, productId));
-        dispatch(GetProducts(station_id));
+    const handleHapus = async () => {
+        await dispatch(DeleteProduct(station_id, productId));
+        await dispatch(GetProducts(station_id));
         toggleHapus()
     }
 

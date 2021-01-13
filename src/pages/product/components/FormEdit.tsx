@@ -25,7 +25,7 @@ const FormEdit = ({ toggle, product } : {toggle : () => void , product : Product
                         register={register({ required: "Tidak Boleh Kosong" })}
                         name="name"
                         label="Nama Product"
-                        value={product.name}
+                        value={product?.name}
                     />
                     {errors.name && (<p className="text-primary whitespace-nowrap pl-60 ">{errors.name.message}</p>)}
 
@@ -33,7 +33,7 @@ const FormEdit = ({ toggle, product } : {toggle : () => void , product : Product
                         register={register({ required: "Tidak Boleh Kosong" })}
                         name="price_buy"
                         label="Harga beli/L"
-                        value={product.price_buy}
+                        value={product?.price_buy}
                     />
                     {errors.price_buy && (<p className="text-primary whitespace-nowrap pl-60 ">{errors.price_buy.message}</p>)}
 
@@ -41,14 +41,14 @@ const FormEdit = ({ toggle, product } : {toggle : () => void , product : Product
                         register={register({ required: "Tidak Boleh Kosong" })}
                         name="price_sell"
                         label="Harga Jual/L"
-                        value={product.price_sell}
+                        value={product?.price_sell}
                     />
                     {errors.price_sell && (<p className="text-primary whitespace-nowrap pl-60 ">{errors.price_sell.message}</p>)}
                     <InputProduct
                         register={register({ required: "Tidak Boleh Kosong" })}
                         name="price_8kl"
                         label="Harga 8KL"
-                        value={product.price_8kl}
+                        value={product?.price_8kl}
                     />
                     {errors.price_8kl && (<p className="text-primary whitespace-nowrap pl-60 ">{errors.price_8kl.message}</p>)}
 
@@ -56,7 +56,7 @@ const FormEdit = ({ toggle, product } : {toggle : () => void , product : Product
                         register={register({ required: "Tidak Boleh Kosong" })}
                         name="pph"
                         label="PPH"
-                        value={product.pph}
+                        value={product?.pph}
                     />
                     {errors.pph && (<p className="text-primary whitespace-nowrap pl-60 ">{errors.pph.message}</p>)}
 
@@ -64,14 +64,14 @@ const FormEdit = ({ toggle, product } : {toggle : () => void , product : Product
                         register={register({ required: "Tidak Boleh Kosong" })}
                         name="margin_pokok"
                         label="Margin Pokok"
-                        value={product.margin_pokok}
+                        value={product?.margin_pokok}
                     />
                     {errors.margin_pokok && (<p className="text-primary whitespace-nowrap pl-60 ">{errors.margin_pokok.message}</p>)}
                     <InputProduct
                         register={register({ required: "Tidak Boleh Kosong" })}
                         name="margin_pph"
                         label="Margin PPH"
-                        value={product.margin_pph}
+                        value={product?.margin_pph}
                     />
                     {errors.margin_pph && (<p className="text-primary whitespace-nowrap pl-60 ">{errors.margin_pph.message}</p>)}
                     <div className="flex justify-end pr-28 mt-24 space-x-3">
