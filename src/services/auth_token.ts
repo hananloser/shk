@@ -3,8 +3,6 @@ import { Cookies } from 'react-cookie'
 import router from 'next/router'
 import { Station } from '../model/Station';
 
-
-
 export type DecodedToken = {
     name: string
     readonly username: string;

@@ -20,14 +20,9 @@ const Sidebar = ({ active = 'deactive' }: Props) => {
 
     const menu = [
         { name: "Produk", path: '/product' },
-        { name: "Laporan Harian", path: '/report' },
+        { name: "Buku Bank", path: '/bank' },
         { name: "Stok Minyak", path: '/stock' },
         { name: "Kas Besar", path: "/kas" },
-        { name: "Buku Bank", path: "/buku_bank" },
-        { name: "Penjualan", path: "/selling" },
-        { name: "Pengeluaran", path: "/pengeluaran" },
-        { name: "Daftar Piutang", path: "/piutang" },
-        { name: "Laba Rugi", path: "/laba-rugi" },
         { name: "Neraca", path: "/neraca" },
     ]
 
@@ -40,7 +35,7 @@ const Sidebar = ({ active = 'deactive' }: Props) => {
                 <MemoDashboard className="text-2xl mt-1 mx-2" />
                 <span className="tracking text-2xl rounded-2xl">Dashboard</span>
             </div>
-            <div className="line bg-white h-0.5 mt-3"></div>
+            <div className="line bg-white h-0.5 mt-3"/>
             <div className="item-menu">
                 {menu.map((item, index) => (
                     <ul key={index} className="text-white font-bold mx-auto my-5 ml-5 tracking-wide font-roboto">

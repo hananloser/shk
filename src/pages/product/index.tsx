@@ -103,7 +103,6 @@ const ProductPage = ({ auth }) => {
                                                     </div>
                                                 </td>
                                             </tr>
-
                                         ))}
                                     </tbody>
                                 </table>
@@ -159,7 +158,7 @@ export const ModalTambah = ({ toggleTambah }) => {
 
     return (
         <>
-            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 min-h-screen fixed flex justify-center text-white items-center z-50" onClick={toggleTambah}></div>
+            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 min-h-screen fixed flex justify-center text-white items-center z-50" onClick={toggleTambah}/>
             <div className="bg-white rounded-xl h-auto absolute inset-0 my-32 xl:ml-80 xl:mr-24 z-50">
                 <FormTambah toggle={toggleTambah} />
             </div>
@@ -170,7 +169,7 @@ export const ModalTambah = ({ toggleTambah }) => {
 export const ModalEdit = ({ toggle, product }) => {
     return (
         <>
-            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-30" onClick={toggle}></div>
+            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-30" onClick={toggle}/>
             <motion.div
                 animate={{ x: 0, }}
                 initial={{ x: -300 }}
@@ -195,7 +194,7 @@ export const ModalHapus = ({ toggleHapus, productId }) => {
 
     return (
         <>
-            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-30" onClick={toggleHapus}></div>
+            <div className="bg-gray-700 right-0 opacity-80 min-w-full inset-0 h-screen fixed flex justify-center text-white items-center z-30" onClick={toggleHapus}/>
             <motion.div
                 animate={{ x: 0, }}
                 initial={{ x: -300 }}
